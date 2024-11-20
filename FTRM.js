@@ -7,6 +7,19 @@ const audioSources = [
     "assets/audio/male_us.MP3",
 ];
 
+// Playback instructions for each interaction
+const playbackInstructions = [
+    "The voice assistant VA-A1 is responding to your question. Please listen to the response below carefully, the audio will only be played once.",
+    "The voice assistant VA-E1 is responding to your question. Please listen to the response below carefully, the audio will only be played once.",
+    "The voice assistant VA-E2 is responding to your question. Please listen to the response below carefully, the audio will only be played once.",
+    "The voice assistant VA-A2 is responding to your question. Please listen to the response below carefully, the audio will only be played once."
+];
+const evaluationInstructions = [
+    "Please use the provided scale to rate how you perceive the voice assistant VA-A1 on different aspects, such as trustworthiness, reliability, and respect.\nWhen the evaluation is complete, click “submit” to continue.",
+    "Please use the provided scale to rate how you perceive the voice assistant VA-E1 on different aspects, such as trustworthiness, reliability, and respect.\nWhen the evaluation is complete, click “submit” to continue.",
+    "Please use the provided scale to rate how you perceive the voice assistant VA-E2 on different aspects, such as trustworthiness, reliability, and respect.\nWhen the evaluation is complete, click “submit” to continue.",
+    "Please use the provided scale to rate how you perceive the voice assistant VA-A2 on different aspects, such as trustworthiness, reliability, and respect.\nWhen the evaluation is complete, click “submit” to continue.\nWhen you have completed all four evaluations, please click “complete”."
+];
 const step1 = document.getElementById("step-1");
 const step2 = document.getElementById("step-2");
 const step3 = document.getElementById("step-3");
@@ -18,11 +31,32 @@ const toStep4Btn = document.getElementById("to-step-4");
 const waveContainerPlayback = document.getElementById("wave-container-playback");
 const sliders = document.querySelectorAll("#step-4 input[type='range']");
 let audioElement = null; // Dynamically created for playback
-
 let isRecording = false;
 let mediaRecorder;
 let audioChunks = [];
-
+// Create the evaluation instruction element if not already created
+let evaluationInstructionElement = step4.querySelector(".evaluation-instruction");
+if (!evaluationInstructionElement) {
+    evaluationInstructionElement = document.createElement("p");
+    evaluationInstructionElement.className = "evaluation-instruction";
+    evaluationInstructionElement.style.textAlign = "center";
+    evaluationInstructionElement.style.marginBottom = "20px";
+    evaluationInstructionElement.style.fontSize = "16px";
+    step4.insertBefore(evaluationInstructionElement, step4.querySelector("form"));
+}
+// Function to update evaluation instruction text
+function updateEvaluationInstruction() {
+    if (interactionCount <= evaluationInstructions.length) {
+        evaluationInstructionElement.textContent = evaluationInstructions[interactionCount - 1];
+    }
+}
+// Ensure the instruction is updated when entering Step 4
+toStep4Btn.addEventListener("click", () => {
+    document.getElementById("step-3").classList.add("hidden");
+    step4.classList.remove("hidden"); // Show Step 4
+    updateEvaluationInstruction(); // Update instruction
+    resetSlidersForNextInteraction(); // Reset sliders
+});
 // Disable Complete button initially
 const completeBtn = document.getElementById("complete-btn");
 completeBtn.disabled = true;
@@ -94,6 +128,7 @@ toStep2Btn.addEventListener("click", () => {
     if (!toStep2Btn.disabled) {
         step1.classList.add("hidden");
         step2.classList.remove("hidden");
+        console.log("Step 2 displayed"); // 调试信息
     }
 });
 
@@ -136,6 +171,21 @@ recordBtn.addEventListener("click", async () => {
     }
 });
 
+// Step 3: Add dynamic playback instruction
+const playbackInstructionElement = document.createElement("p");
+playbackInstructionElement.className = "playback-instruction";
+playbackInstructionElement.style.textAlign = "center";
+playbackInstructionElement.style.marginBottom = "20px";
+playbackInstructionElement.style.fontSize = "16px";
+step3.insertBefore(playbackInstructionElement, waveContainerPlayback);
+
+// Update the instruction text based on the current interaction count
+function updatePlaybackInstruction() {
+    if (interactionCount <= playbackInstructions.length) {
+        playbackInstructionElement.textContent = playbackInstructions[interactionCount - 1];
+    }
+}
+
 // Step 3: Audio Playback and Navigation
 toStep4Btn.disabled = true;
 
@@ -147,6 +197,8 @@ toStep4Btn.addEventListener("click", () => {
 
 // Play audio for interaction
 function playAudioForInteraction() {
+    updatePlaybackInstruction(); // Update the instruction before playing audio
+
     const audioSource = audioSources[interactionCount - 1]; // Get the correct audio source
 
     if (!audioSource) return;
@@ -235,13 +287,32 @@ completeBtn.addEventListener("click", () => {
     showThankYouPage();
 });
 
-// Display thank you page
+// 获取第五页元素
+const step5 = document.getElementById("step-5");
+
+// 完成按钮逻辑，跳转到第五页
+completeBtn.addEventListener("click", () => {
+    // 隐藏所有页面
+    step1.classList.add("hidden");
+    step2.classList.add("hidden");
+    step3.classList.add("hidden");
+    step4.classList.add("hidden");
+
+    // 显示第五页
+    step5.classList.remove("hidden");
+});
+
+// 确保第五页的显示函数无重复
 function showThankYouPage() {
-    const thankYouPage = document.createElement("div");
-    thankYouPage.className = "container";
-    thankYouPage.innerHTML = `
-        <h1>Thank you for your participation</h1>
-    `;
-    document.body.innerHTML = "";
-    document.body.appendChild(thankYouPage);
+    // 隐藏其他页面
+    step1.classList.add("hidden");
+    step2.classList.add("hidden");
+    step3.classList.add("hidden");
+    step4.classList.add("hidden");
+
+    // 显示第五页
+    step5.classList.remove("hidden");
 }
+
+// 替换多余的逻辑
+completeBtn.addEventListener("click", showThankYouPage);
