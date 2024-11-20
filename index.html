@@ -4,8 +4,6 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Multi-Step Interaction</title>
-        <!-- 引用 CSS 文件 -->
-    <link rel="stylesheet" href="FTRM.css">
     <link rel="stylesheet" href="styles.css">
 </head>
 <body>
@@ -13,7 +11,7 @@
     <div id="step-1" class="container active">
         <h1>Step 1: Questionnaire</h1>
         <form id="questionnaire">
-            <p>① Fill in the blank: What is your age?</p>
+            <p> ① What is your age?</p>
             <ul>
                 <li><input type="radio" name="age" value="18-30"> A. 18-30</li>
                 <li><input type="radio" name="age" value="31-40"> B. 31-40</li>
@@ -22,7 +20,7 @@
                 <li><input type="radio" name="age" value="61+"> E. 61+</li>
             </ul>
 
-            <p>What is your gender?</p>
+            <p> ② What is your gender?</p>
             <ul>
                 <li><input type="radio" name="gender" value="male"> A. Male</li>
                 <li><input type="radio" name="gender" value="female"> B. Female</li>
@@ -30,13 +28,13 @@
                 <li><input type="radio" name="gender" value="prefer-not-to-say"> D. Prefer not to say</li>
             </ul>
 
-            <p>② Choice question: What is your hearing condition?</p>
+            <p> ③ What is your hearing condition?</p>
             <ul>
                 <li><input type="radio" name="hearing" value="normal"> A. Completely normal, no hearing issues</li>
                 <li><input type="radio" name="hearing" value="issues"> B. Moderate or Severe hearing issues</li>
             </ul>
 
-            <p>③ Choice question: How often do you use a voice assistant?</p>
+            <p>④ How often do you use a voice assistant?</p>
             <ul>
                 <li><input type="radio" name="assistant" value="daily"> A. Every day</li>
                 <li><input type="radio" name="assistant" value="weekly"> B. A few times a week</li>
@@ -49,7 +47,7 @@
                 </li>
             </ul>
 
-            <p>④ Choice question: Which accent of English do you use most often?</p>
+            <p>⑤ Which accent of English do you use most often?</p>
             <ul>
                 <li><input type="radio" name="accent" value="american"> A. American English</li>
                 <li><input type="radio" name="accent" value="british"> B. British English</li>
@@ -61,6 +59,12 @@
                     <input type="text" name="accent-other" class="hidden" placeholder="Specify">
                 </li>
                 <li><input type="radio" name="accent" value="unknown"> G. I don’t know</li>
+            </ul>
+           <p> ⑥  Is English your first, second, or third language (or beyond)?</p>
+            <ul>
+                <li><input type="radio" name="language" value="English is my first language (native speaker)."> A. English is my first language.</li>
+                <li><input type="radio" name="language" value="English is my second language."> B. English is my second language.</li>
+                <li><input type="radio" name="language" value="English is my third language or beyond."> C. English is my third language or beyond.</li>
             </ul>
 
             <button type="button" id="to-step-2" class="next-btn" disabled>Next</button>
@@ -135,7 +139,5 @@
             <button type="button" id="complete-btn" class="next-btn hidden">Complete</button>
         </form>
     </div>
-     <!-- 引用 JS 文件 -->
-    <script src="FTRM.js" defer></script>
 </body>
 </html>
