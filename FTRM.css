@@ -7,6 +7,8 @@ body {
     justify-content: center;
     align-items: center;
     background-color: #f7f7f7;
+    overflow: hidden;
+    max-height: 100vh;
 }
 
 /* 页面容器 */
@@ -35,8 +37,8 @@ body {
 
 /* 按钮样式 */
 .next-btn, .submit-btn {
-    display: block; /* 让按钮成为块级元素 */
-    margin: 20px auto; /* 上下留白20px，水平居中 */
+    display: block;
+    margin: 20px auto;
     padding: 15px 30px;
     border: none;
     border-radius: 25px;
@@ -56,29 +58,69 @@ body {
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
 }
 
-/* 美化录音按钮 */
+/* 禁用按钮样式 */
+button:disabled {
+    background: #ccc;
+    cursor: not-allowed;
+    opacity: 0.7;
+}
+/* 第二页特定按钮调整 */
 .record-btn {
     padding: 15px 30px;
-    font-size: 18px;
+    width: 120px; /* 固定宽度 */
+    height: 120px; /* 固定高度，保证按钮为正圆形 */
+    border: none;
+    border-radius: 50%; /* 设置为圆形 */
+    font-size: 16px; /* 调整字体大小 */
     font-weight: bold;
     color: white;
-    background: linear-gradient(90deg, #ff6f61, #ff8a65);
-    border: none;
-    border-radius: 50%;
+    background: linear-gradient(90deg, #ff6f61, #ff8a65); /* 渐变色 */
     cursor: pointer;
     outline: none;
-    width: 120px;
-    height: 120px;
     display: flex;
     align-items: center;
     justify-content: center;
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2); /* 添加阴影 */
     transition: transform 0.2s ease, box-shadow 0.2s ease;
 }
 
 .record-btn:active {
-    transform: scale(0.9);
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+    transform: scale(0.95); /* 点击时缩小效果 */
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2); /* 点击时阴影缩小 */
+}
+
+/* 问卷容器样式 */
+ul {
+    list-style: none;
+    padding: 0;
+    margin-bottom: 20px;
+}
+
+ul li {
+    margin-bottom: 10px;
+}
+
+/* 单选框样式 */
+input[type="radio"] {
+    margin-right: 10px;
+}
+
+/* 文本输入框样式 */
+input[type="text"] {
+    width: calc(100% - 20px);
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    box-sizing: border-box;
+    font-size: 14px;
+}
+
+/* 问题序号样式 */
+p {
+    font-size: 16px;
+    font-weight: bold;
+    margin-bottom: 10px;
+    color: #333;
 }
 
 /* 波纹动画容器 */
@@ -117,6 +159,7 @@ body {
         transform: scaleY(1.5);
     }
 }
+
 /* 调整滑块样式 */
 .slider-row {
     margin-bottom: 30px;
