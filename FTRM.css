@@ -166,9 +166,10 @@ p {
     margin-bottom: 30px;
     padding: 10px 0;
     position: relative;
+    display: flex; /* 使用Flex布局 */
+    align-items: center; /* 垂直居中 */
+    justify-content: space-between; /* 两端对齐 */
     background: #f9f9f9;
-    display: flex;
-    align-items: center;
 }
 
 .slider-label {
@@ -193,7 +194,7 @@ p {
 
 input[type="range"] {
     -webkit-appearance: none;
-    width: 100%;
+    width: 80%; /* 缩短滑块长度，留出右侧空间 */
     height: 6px;
     background: #e0e0e0;
     border-radius: 5px;
@@ -227,7 +228,7 @@ input[type="range"]::-moz-range-thumb {
 .current-value {
     font-size: 14px;
     font-weight: bold;
-    color: #333;
-    margin-left: 10px;
-    position: relative;
+    color: #555;
+    width: 50px;
+    text-align: center;
 }
