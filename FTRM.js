@@ -1,10 +1,10 @@
 let interactionCount = 1; // Current interaction count
 const maxInteractions = 4; // Maximum number of interactions
 const audioSources = [
-    "assets/audio/female_us.MP3",
-    "assets/audio/female_uk.MP3",
-    "assets/audio/male_uk.MP3",
-    "assets/audio/male_us.MP3",
+    "assets/audio/female us.MP3",
+    "assets/audio/female uk.MP3",
+    "assets/audio/male uk.MP3",
+    "assets/audio/male us.MP3",
 ];
 
 const step1 = document.getElementById("step-1");
