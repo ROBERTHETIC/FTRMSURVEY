@@ -1,5 +1,12 @@
 let interactionCount = 1; // Current interaction count
 const maxInteractions = 4; // Maximum number of interactions
+const audioSources = [
+    "assets/audio/female_us.MP3",
+    "assets/audio/female_uk.MP3",
+    "assets/audio/male_uk.MP3",
+    "assets/audio/male_us.MP3",
+];
+
 const step1 = document.getElementById("step-1");
 const step2 = document.getElementById("step-2");
 const step3 = document.getElementById("step-3");
@@ -10,6 +17,7 @@ const waveContainerRecording = document.getElementById("wave-container-recording
 const toStep4Btn = document.getElementById("to-step-4");
 const waveContainerPlayback = document.getElementById("wave-container-playback");
 const sliders = document.querySelectorAll("#step-4 input[type='range']");
+const audioElement = new Audio();
 
 let isRecording = false;
 let mediaRecorder;
@@ -127,17 +135,19 @@ toStep4Btn.addEventListener("click", () => {
 
 // Play audio for interaction
 function playAudioForInteraction() {
-    waveContainerPlayback.classList.remove("hidden");
+    const audioSource = audioSources[interactionCount - 1]; // Get the correct audio source
+    if (audioSource) {
+        audioElement.src = audioSource;
+        audioElement.play();
+        audioElement.onended = () => {
+            toStep4Btn.disabled = false;
+            toStep4Btn.style.opacity = "1";
+        };
 
-    toStep4Btn.disabled = true;
-    toStep4Btn.style.opacity = "0.5";
-
-    setTimeout(() => {
-        waveContainerPlayback.classList.add("hidden");
-
-        toStep4Btn.disabled = false;
-        toStep4Btn.style.opacity = "1";
-    }, 3000);
+        waveContainerPlayback.classList.remove("hidden");
+        toStep4Btn.disabled = true;
+        toStep4Btn.style.opacity = "0.5";
+    }
 }
 
 // Step 4: Slider Validation Logic
@@ -200,6 +210,9 @@ function showThankYouPage() {
         <h1>Thank you for your participation</h1>
     `;
     document.body.innerHTML = "";
+    document.body.appendChild(thankYouPage);
+}
+
     document.body.appendChild(thankYouPage);
 }
 
