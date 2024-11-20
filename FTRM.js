@@ -1,10 +1,10 @@
 let interactionCount = 1; // Current interaction count
 const maxInteractions = 4; // Maximum number of interactions
 const audioSources = [
-    "assets/audio/female us.MP3",
-    "assets/audio/female uk.MP3",
-    "assets/audio/male uk.MP3",
-    "assets/audio/male us.MP3",
+    "assets/audio/female_us.MP3",
+    "assets/audio/female_uk.MP3",
+    "assets/audio/male_uk.MP3",
+    "assets/audio/male_us.MP3",
 ];
 
 const step1 = document.getElementById("step-1");
@@ -17,7 +17,7 @@ const waveContainerRecording = document.getElementById("wave-container-recording
 const toStep4Btn = document.getElementById("to-step-4");
 const waveContainerPlayback = document.getElementById("wave-container-playback");
 const sliders = document.querySelectorAll("#step-4 input[type='range']");
-let audioElement = null; // Will be dynamically created
+let audioElement = null; // Dynamically created for playback
 
 let isRecording = false;
 let mediaRecorder;
@@ -43,12 +43,12 @@ function validateQuestions() {
     const allAnswered = Array.from(questionnaireForm.querySelectorAll("ul")).every((ul) => {
         const radios = Array.from(ul.querySelectorAll("input[type='radio']"));
         const selectedRadio = radios.find((radio) => radio.checked);
-        
+
         if (selectedRadio && selectedRadio.value === "other") {
             const otherInput = ul.querySelector("input[type='text']");
             return otherInput && otherInput.value.trim() !== "";
         }
-        
+
         return !!selectedRadio; // Ensure a radio option is selected
     });
 
@@ -229,7 +229,8 @@ submitBtn.addEventListener("click", (e) => {
 // Complete button logic
 completeBtn.addEventListener("click", () => {
     step4.classList.add("hidden");
-    showThankYouPage();
+    step3.classList.remove("hidden");
+    playAudioForInteraction();
 });
 
 // Display thank you page
