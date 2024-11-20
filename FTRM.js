@@ -52,6 +52,7 @@ function handleOtherInput(radioGroupName, textInputName) {
                 textInput.disabled = true; // Disable the input field
                 textInput.value = ""; // Clear the text input
             }
+            validateQuestions(); // Re-validate on radio selection change
         });
     });
 }
@@ -62,9 +63,18 @@ handleOtherInput("accent", "accent-other");
 
 // Validate all questions are answered
 function validateQuestions() {
-    const allAnswered = Array.from(questionnaireForm.querySelectorAll("ul")).every((ul) =>
-        Array.from(ul.querySelectorAll("input[type='radio']")).some((radio) => radio.checked)
-    );
+    const allAnswered = Array.from(questionnaireForm.querySelectorAll("ul")).every((ul) => {
+        const radios = ul.querySelectorAll("input[type='radio']");
+        const hasSelected = Array.from(radios).some((radio) => radio.checked);
+
+        // Check open-ended fields if "other" is selected
+        const otherField = ul.querySelector("input[type='text']");
+        if (otherField && !otherField.disabled) {
+            return hasSelected && otherField.value.trim() !== "";
+        }
+
+        return hasSelected;
+    });
 
     // Enable the "Next" button if all questions are answered
     toStep2Btn.disabled = !allAnswered;
@@ -74,6 +84,11 @@ function validateQuestions() {
 // Attach listeners to question inputs
 questionInputs.forEach((input) => {
     input.addEventListener("change", validateQuestions);
+});
+
+// Attach listeners to open-ended inputs for real-time validation
+openEndedInputs.forEach((input) => {
+    input.addEventListener("input", validateQuestions);
 });
 
 // Step 1: Handle Next Button Click
@@ -212,7 +227,3 @@ function showThankYouPage() {
     document.body.innerHTML = "";
     document.body.appendChild(thankYouPage);
 }
-
-    document.body.appendChild(thankYouPage);
-}
-
