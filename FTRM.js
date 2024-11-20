@@ -1,4 +1,4 @@
-let interactionCount = 1; // Current interaction count
+llet interactionCount = 1; // Current interaction count
 const maxInteractions = 4; // Maximum number of interactions
 const audioSources = [
     "assets/audio/female_us.MP3",
@@ -31,7 +31,6 @@ completeBtn.classList.add("hidden");
 
 // Step 1: Questionnaire Logic
 const questionInputs = document.querySelectorAll("#step-1 input[type='radio']");
-const openEndedInputs = document.querySelectorAll("#step-1 input[type='text']");
 const questionnaireForm = document.getElementById("questionnaire");
 
 // Disable Next button initially
@@ -43,46 +42,12 @@ function validateQuestions() {
     const allAnswered = Array.from(questionnaireForm.querySelectorAll("ul")).every((ul) => {
         const radios = Array.from(ul.querySelectorAll("input[type='radio']"));
         const selectedRadio = radios.find((radio) => radio.checked);
-
-        if (selectedRadio && selectedRadio.value === "other") {
-            const otherInput = ul.querySelector("input[type='text']");
-            return otherInput && otherInput.value.trim() !== "";
-        }
-
         return !!selectedRadio; // Ensure a radio option is selected
     });
 
-    // Enable the "Next" button if all questions are answered
     toStep2Btn.disabled = !allAnswered;
     toStep2Btn.style.opacity = allAnswered ? "1" : "0.5";
 }
-
-// Handle "Other" inputs logic
-function handleOtherInput(radioGroupName, textInputName) {
-    const radios = document.querySelectorAll(`input[name='${radioGroupName}']`);
-    const textInput = document.querySelector(`input[name='${textInputName}']`);
-
-    radios.forEach((radio) => {
-        radio.addEventListener("change", () => {
-            if (radio.value === "other") {
-                textInput.disabled = false; // Enable the input field
-                textInput.focus();
-            } else {
-                textInput.disabled = true; // Disable the input field
-                textInput.value = ""; // Clear the text input
-            }
-            validateQuestions(); // Re-validate on radio selection change
-        });
-    });
-
-    if (textInput) {
-        textInput.addEventListener("input", validateQuestions); // Validate when text is entered
-    }
-}
-
-// Attach "Other" logic handlers
-handleOtherInput("assistant", "assistant-other");
-handleOtherInput("accent", "accent-other");
 
 // Attach listeners to question inputs
 questionInputs.forEach((input) => {
@@ -142,7 +107,6 @@ toStep4Btn.disabled = true;
 toStep4Btn.addEventListener("click", () => {
     step3.classList.add("hidden");
     step4.classList.remove("hidden");
-
     resetSlidersForNextInteraction();
 });
 
@@ -152,14 +116,13 @@ function playAudioForInteraction() {
 
     if (!audioSource) return;
 
-    // Create or reset the audio element
     if (audioElement) {
         audioElement.pause();
         audioElement.remove();
     }
 
     audioElement = new Audio(audioSource);
-    audioElement.volume = 1.0; // Ensure volume is at 100%
+    audioElement.volume = 1.0;
     audioElement.play();
 
     waveContainerPlayback.classList.remove("hidden");
@@ -190,10 +153,10 @@ sliders.forEach((slider) => {
     const valueDisplay = document.createElement("span");
     valueDisplay.classList.add("current-value");
     valueDisplay.textContent = slider.value;
-    slider.parentNode.appendChild(valueDisplay);
+    slider.parentNode.insertBefore(valueDisplay, slider.nextSibling);
 
     slider.addEventListener("input", () => {
-        valueDisplay.textContent = slider.value;
+        valueDisplay.textContent = slider.value; // Update real-time value
         validateSliders();
     });
 });
@@ -210,7 +173,7 @@ function validateSliders() {
 function resetSlidersForNextInteraction() {
     sliders.forEach((slider) => {
         slider.value = slider.defaultValue;
-        slider.nextElementSibling.textContent = slider.value; // Reset displayed value
+        slider.nextElementSibling.textContent = slider.value;
     });
 
     submitBtn.disabled = true;
