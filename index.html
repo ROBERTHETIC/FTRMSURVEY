@@ -98,41 +98,49 @@
     <!-- Step 4: Evaluation -->
     <div id="step-4" class="container hidden">
         <h1>Step 4: Evaluation</h1>
-     <form id="evaluation">
-            <div class="slider-row">
-                <div class="slider-label">
-                    <span class="left-label">Untrustworthy</span>
-                    <span class="right-label">Trustworthy</span>
-                </div>
-                <div style="display: flex; align-items: center;">
-                    <input type="range" id="trustworthy" name="trustworthy" min="1" max="7" step="1">
-                    <span id="trustworthy-value" class="slider-value"></span>
-                </div>
+<div id="step-4" class="container hidden">
+    <h1>Step 4: Evaluation</h1>
+    <form id="evaluation">
+        <div class="slider-row">
+            <div class="slider-label">
+                <span class="left-label">Untrustworthy</span>
+                <span class="right-label">Trustworthy</span>
             </div>
-            <div class="slider-row">
-                <div class="slider-label">
-                    <span class="left-label">Unreliable</span>
-                    <span class="right-label">Reliable</span>
-                </div>
-                <div style="display: flex; align-items: center;">
-                    <input type="range" id="reliable" name="reliable" min="1" max="7" step="1">
-                    <span id="reliable-value" class="slider-value"></span>
-                </div>
+            <input type="range" id="trustworthy" name="trustworthy" min="1" max="7" step="1">
+            <div class="slider-value-row">
+                <span class="range-label left-range">1</span>
+                <span id="trustworthy-value" class="current-value">4</span>
+                <span class="range-label right-range">7</span>
             </div>
-            <div class="slider-row">
-                <div class="slider-label">
-                    <span class="left-label">Disrespectful</span>
-                    <span class="right-label">Respectful</span>
-                </div>
-                <div style="display: flex; align-items: center;">
-                    <input type="range" id="respectful" name="respectful" min="1" max="7" step="1">
-                    <span id="respectful-value" class="slider-value"></span>
-                </div>
+        </div>
+        <div class="slider-row">
+            <div class="slider-label">
+                <span class="left-label">Unreliable</span>
+                <span class="right-label">Reliable</span>
             </div>
-            <button type="submit" class="submit-btn">Submit</button>
-            <button type="button" id="complete-btn" class="next-btn hidden">Complete</button>
-        </form>
-    </div>
+            <input type="range" id="reliable" name="reliable" min="1" max="7" step="1">
+            <div class="slider-value-row">
+                <span class="range-label left-range">1</span>
+                <span id="reliable-value" class="current-value">4</span>
+                <span class="range-label right-range">7</span>
+            </div>
+        </div>
+        <div class="slider-row">
+            <div class="slider-label">
+                <span class="left-label">Disrespectful</span>
+                <span class="right-label">Respectful</span>
+            </div>
+            <input type="range" id="respectful" name="respectful" min="1" max="7" step="1">
+            <div class="slider-value-row">
+                <span class="range-label left-range">1</span>
+                <span id="respectful-value" class="current-value">4</span>
+                <span class="range-label right-range">7</span>
+            </div>
+        </div>
+        <button type="submit" class="submit-btn" disabled>Submit</button>
+        <button type="button" id="complete-btn" class="next-btn hidden">Complete</button>
+    </form>
+</div>
     <script src="./FTRM.js" defer></script>
 </body>
 </html>
