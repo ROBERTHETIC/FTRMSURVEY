@@ -185,6 +185,19 @@ const submitBtn = document.querySelector(".submit-btn");
 submitBtn.disabled = true;
 submitBtn.style.opacity = "0.5";
 
+// Real-time slider value update and validation
+sliders.forEach((slider) => {
+    const valueDisplay = document.createElement("span");
+    valueDisplay.classList.add("current-value");
+    valueDisplay.textContent = slider.value;
+    slider.parentNode.appendChild(valueDisplay);
+
+    slider.addEventListener("input", () => {
+        valueDisplay.textContent = slider.value;
+        validateSliders();
+    });
+});
+
 // Validate sliders
 function validateSliders() {
     const allMoved = Array.from(sliders).every((slider) => slider.value !== slider.defaultValue);
@@ -193,15 +206,11 @@ function validateSliders() {
     submitBtn.style.opacity = allMoved ? "1" : "0.5";
 }
 
-// Attach listeners to sliders
-sliders.forEach((slider) => {
-    slider.addEventListener("input", validateSliders);
-});
-
 // Reset sliders for the next interaction
 function resetSlidersForNextInteraction() {
     sliders.forEach((slider) => {
         slider.value = slider.defaultValue;
+        slider.nextElementSibling.textContent = slider.value; // Reset displayed value
     });
 
     submitBtn.disabled = true;
