@@ -227,11 +227,12 @@ submitBtn.addEventListener("click", (e) => {
 });
 
 // Complete button logic
+// Complete button logic
 completeBtn.addEventListener("click", () => {
-    step4.classList.add("hidden");
-    step3.classList.remove("hidden");
-    playAudioForInteraction();
+    // Go directly to the Thank You page after completing all interactions
+    showThankYouPage();
 });
+
 
 // Display thank you page
 function showThankYouPage() {
