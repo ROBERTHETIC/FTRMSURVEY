@@ -195,6 +195,11 @@ p {
     justify-content: center;
     font-size: 16px;
     color: #333;
+}
+.current-value {
+    font-size: 16px;
+    font-weight: bold;
+    color: #333;
     margin-left: 10px;
 }
 
