@@ -167,6 +167,8 @@ p {
     padding: 10px 0;
     position: relative;
     background: #f9f9f9;
+    display: flex;
+    align-items: center;
 }
 
 .slider-label {
@@ -222,15 +224,10 @@ input[type="range"]::-moz-range-thumb {
 }
 
 /* 实时动态值样式 */
-.slider-row {
-    display: flex;
-    align-items: center;
-    position: relative;
-}
-
-.slider-value-row {
-    margin-left: 15px;
+.current-value {
     font-size: 14px;
     font-weight: bold;
     color: #333;
+    margin-left: 10px;
+    position: relative;
 }
