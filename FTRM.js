@@ -1,5 +1,5 @@
-let interactionCount = 1; // 当前交互次数
-const maxInteractions = 4; // 最大交互次数
+let interactionCount = 1; // Current interaction count
+const maxInteractions = 4; // Maximum number of interactions
 const step1 = document.getElementById("step-1");
 const step2 = document.getElementById("step-2");
 const step3 = document.getElementById("step-3");
@@ -15,43 +15,68 @@ let isRecording = false;
 let mediaRecorder;
 let audioChunks = [];
 
-// 禁用 Complete 按钮并隐藏
+// Disable Complete button initially
 const completeBtn = document.getElementById("complete-btn");
 completeBtn.disabled = true;
 completeBtn.style.opacity = "0.5";
 completeBtn.classList.add("hidden");
 
-// 第一步逻辑：验证问卷
+// Step 1: Questionnaire Logic
 const questionInputs = document.querySelectorAll("#step-1 input[type='radio']");
-const questionnaireForm = document.getElementById("step-1");
+const openEndedInputs = document.querySelectorAll("#step-1 input[type='text']");
+const questionnaireForm = document.getElementById("questionnaire");
 
-// 禁用 Next 按钮初始状态
+// Disable Next button initially
 toStep2Btn.disabled = true;
 toStep2Btn.style.opacity = "0.5";
 
-// 检查是否所有问题都有选项被选中
-function validateQuestions() {
-    const questions = Array.from(questionnaireForm.querySelectorAll("ul"));
-    const allAnswered = questions.every((ul) => {
-        return Array.from(ul.querySelectorAll("input[type='radio']")).some((radio) => radio.checked);
-    });
+// Handle "Other" inputs logic
+function handleOtherInput(radioGroupName, textInputName) {
+    const radios = document.querySelectorAll(`input[name='${radioGroupName}']`);
+    const textInput = document.querySelector(`input[name='${textInputName}']`);
 
+    radios.forEach((radio) => {
+        radio.addEventListener("change", () => {
+            if (radio.value === "other") {
+                textInput.disabled = false; // Enable the input field
+                textInput.focus();
+            } else {
+                textInput.disabled = true; // Disable the input field
+                textInput.value = ""; // Clear the text input
+            }
+        });
+    });
+}
+
+// Attach "Other" logic handlers
+handleOtherInput("assistant", "assistant-other");
+handleOtherInput("accent", "accent-other");
+
+// Validate all questions are answered
+function validateQuestions() {
+    const allAnswered = Array.from(questionnaireForm.querySelectorAll("ul")).every((ul) =>
+        Array.from(ul.querySelectorAll("input[type='radio']")).some((radio) => radio.checked)
+    );
+
+    // Enable the "Next" button if all questions are answered
     toStep2Btn.disabled = !allAnswered;
     toStep2Btn.style.opacity = allAnswered ? "1" : "0.5";
 }
 
-// 为每个问题选项添加事件监听器
+// Attach listeners to question inputs
 questionInputs.forEach((input) => {
     input.addEventListener("change", validateQuestions);
 });
 
-// 跳转到 Step 2
+// Step 1: Handle Next Button Click
 toStep2Btn.addEventListener("click", () => {
-    step1.classList.add("hidden");
-    step2.classList.remove("hidden");
+    if (!toStep2Btn.disabled) {
+        step1.classList.add("hidden");
+        step2.classList.remove("hidden");
+    }
 });
 
-// 第二页录音逻辑：Start/Stop Recording
+// Step 2: Recording Logic
 recordBtn.addEventListener("click", async () => {
     if (!isRecording) {
         isRecording = true;
@@ -90,7 +115,7 @@ recordBtn.addEventListener("click", async () => {
     }
 });
 
-// 第三页逻辑：音频播放与导航
+// Step 3: Audio Playback and Navigation
 toStep4Btn.disabled = true;
 
 toStep4Btn.addEventListener("click", () => {
@@ -100,7 +125,7 @@ toStep4Btn.addEventListener("click", () => {
     resetSlidersForNextInteraction();
 });
 
-// 播放音频
+// Play audio for interaction
 function playAudioForInteraction() {
     waveContainerPlayback.classList.remove("hidden");
 
@@ -115,14 +140,12 @@ function playAudioForInteraction() {
     }, 3000);
 }
 
-// 第四页逻辑：滑块验证
+// Step 4: Slider Validation Logic
 const submitBtn = document.querySelector(".submit-btn");
-
-// 初始化 Submit 按钮为禁用状态
 submitBtn.disabled = true;
 submitBtn.style.opacity = "0.5";
 
-// 检查所有滑块是否已移动
+// Validate sliders
 function validateSliders() {
     const allMoved = Array.from(sliders).every((slider) => slider.value !== slider.defaultValue);
 
@@ -130,23 +153,22 @@ function validateSliders() {
     submitBtn.style.opacity = allMoved ? "1" : "0.5";
 }
 
-// 为每个滑块添加事件监听器
+// Attach listeners to sliders
 sliders.forEach((slider) => {
     slider.addEventListener("input", validateSliders);
 });
 
-// 重置滑块和 Submit 按钮
+// Reset sliders for the next interaction
 function resetSlidersForNextInteraction() {
     sliders.forEach((slider) => {
         slider.value = slider.defaultValue;
     });
 
-    // 禁用 Submit 按钮
     submitBtn.disabled = true;
     submitBtn.style.opacity = "0.5";
 }
 
-// 提交和交互逻辑
+// Submit and interaction logic
 submitBtn.addEventListener("click", (e) => {
     e.preventDefault();
 
@@ -164,13 +186,13 @@ submitBtn.addEventListener("click", (e) => {
     }
 });
 
-// 完成按钮点击事件
+// Complete button logic
 completeBtn.addEventListener("click", () => {
     step4.classList.add("hidden");
     showThankYouPage();
 });
 
-// 显示感谢页面
+// Display thank you page
 function showThankYouPage() {
     const thankYouPage = document.createElement("div");
     thankYouPage.className = "container";
