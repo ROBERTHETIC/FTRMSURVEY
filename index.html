@@ -8,9 +8,9 @@
 </head>
 <body>
     <!-- Step 1: Questionnaire -->
-    <div id="step-1" class="container active">
-        <h1>Step 1: Questionnaire</h1>
-        <form id="questionnaire">
+ <div id="step-1" class="container active">
+   <form id="questionnaire">
+    <h1>Step 1: Questionnaire</h1>
             <p> ① What is your age?</p>
             <ul>
                 <li><input type="radio" name="age" value="18-30"> A. 18-30</li>
@@ -66,7 +66,6 @@
                 <li><input type="radio" name="language" value="English is my second language."> B. English is my second language.</li>
                 <li><input type="radio" name="language" value="English is my third language or beyond."> C. English is my third language or beyond.</li>
             </ul>
-
             <button type="button" id="to-step-2" class="next-btn" disabled>Next</button>
         </form>
     </div>
@@ -74,6 +73,12 @@
     <!-- Step 2: Recording -->
     <div id="step-2" class="container hidden">
         <h1>Step 2: Recording</h1>
+       <p class="instruction">
+            You're using the voice assistant to ask a specified question, and when you're done, the voice assistants will automatically answer the question. 
+            You will hear the answers given to you by the four voice assistants in turn (each played only once), and you will evaluate them in turn.<br><br>
+            Please use the voice interface below to ask the following question aloud, click “Start” to begin recording:<br>
+            <b>“Which is more harmful, staying up late but sleeping more or not staying up late but sleeping less?”</b>
+        </p>
         <div class="center-content">
             <button id="record-btn" class="record-btn">Start</button>
             <div id="wave-container-recording" class="wave-container hidden">
@@ -94,7 +99,6 @@
         </div>
         <button type="button" id="to-step-4" class="next-btn">Next</button>
     </div>
-
     <!-- Step 4: Evaluation -->
   <div id="step-4" class="container hidden">
     <h1>Step 4: Evaluation</h1>
@@ -137,6 +141,24 @@
         <button type="submit" class="submit-btn" disabled>Submit</button>
         <button type="button" id="complete-btn" class="next-btn hidden">Complete</button>
     </form>
+</div>
+  <!-- Step 5: Thank You Page -->
+<div id="step-5" class="container hidden">
+    <h1>Thank You!</h1>
+    <p>
+        Thank you for completing this study! Your input is incredibly valuable and will help us better understand how people interact with voice assistants and what factors influence trust in these systems.
+    </p>
+    <p>
+        If you have any questions about this study or would like to know more about our research, please feel free to contact us:
+    </p>
+    <ul>
+        <li>Linwei He (linwei.he24@imperial.ac.uk)</li>
+        <li>Ziyi Ma (ziyi.ma24@imperial.ac.uk)</li>
+        <li>Omar Elmaayergi (omar.elmaayergi24@imperial.ac.uk)</li>
+        <li>Yunting Zhu (yunting.zhu24@imperial.ac.uk)</li>
+        <li>Huiyu Lei (huiyu.lei24@imperial.ac.uk)</li>
+    </ul>
+    <p>Your participation is greatly appreciated, and we hope you have a wonderful day!</p>
 </div>
     <script src="./FTRM.js" defer></script>
 </html>
