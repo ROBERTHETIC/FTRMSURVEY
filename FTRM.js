@@ -140,10 +140,9 @@ recordBtn.addEventListener("click", async () => {
 toStep4Btn.disabled = true;
 
 toStep4Btn.addEventListener("click", () => {
-    step3.classList.add("hidden");
-    step4.classList.remove("hidden");
-
-    resetSlidersForNextInteraction();
+    document.getElementById("step-3").classList.add("hidden");
+    step4.classList.remove("hidden"); // 显示第四步
+    resetSlidersForNextInteraction(); // 初始化滑块
 });
 
 // Play audio for interaction
@@ -187,11 +186,7 @@ submitBtn.style.opacity = "0.5";
 
 // Real-time slider value update and validation
 sliders.forEach((slider) => {
-    const valueDisplay = document.createElement("span");
-    valueDisplay.classList.add("current-value");
-    valueDisplay.textContent = slider.value;
-    slider.parentNode.appendChild(valueDisplay);
-
+    const valueDisplay = document.getElementById(`${slider.id}-value`);
     slider.addEventListener("input", () => {
         valueDisplay.textContent = slider.value;
         validateSliders();
@@ -209,8 +204,8 @@ function validateSliders() {
 // Reset sliders for the next interaction
 function resetSlidersForNextInteraction() {
     sliders.forEach((slider) => {
-        slider.value = slider.defaultValue;
-        slider.nextElementSibling.textContent = slider.value; // Reset displayed value
+        slider.value = 4; // 默认值4
+        document.getElementById(`${slider.id}-value`).textContent = slider.value;
     });
 
     submitBtn.disabled = true;
