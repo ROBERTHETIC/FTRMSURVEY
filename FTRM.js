@@ -1,4 +1,4 @@
-llet interactionCount = 1; // Current interaction count
+let interactionCount = 1; // Current interaction count
 const maxInteractions = 4; // Maximum number of interactions
 const audioSources = [
     "assets/audio/female_us.MP3",
@@ -31,6 +31,7 @@ completeBtn.classList.add("hidden");
 
 // Step 1: Questionnaire Logic
 const questionInputs = document.querySelectorAll("#step-1 input[type='radio']");
+const textInputs = document.querySelectorAll("#step-1 input[type='text']");
 const questionnaireForm = document.getElementById("questionnaire");
 
 // Disable Next button initially
@@ -42,6 +43,12 @@ function validateQuestions() {
     const allAnswered = Array.from(questionnaireForm.querySelectorAll("ul")).every((ul) => {
         const radios = Array.from(ul.querySelectorAll("input[type='radio']"));
         const selectedRadio = radios.find((radio) => radio.checked);
+
+        if (selectedRadio && selectedRadio.value === "other") {
+            const otherInput = ul.querySelector("input[type='text']");
+            return otherInput && otherInput.value.trim() !== ""; // Ensure "Other" input is filled
+        }
+
         return !!selectedRadio; // Ensure a radio option is selected
     });
 
@@ -52,6 +59,11 @@ function validateQuestions() {
 // Attach listeners to question inputs
 questionInputs.forEach((input) => {
     input.addEventListener("change", validateQuestions);
+});
+
+// Attach listeners to "Other" text inputs
+textInputs.forEach((input) => {
+    input.addEventListener("input", validateQuestions);
 });
 
 // Step 1: Handle Next Button Click
