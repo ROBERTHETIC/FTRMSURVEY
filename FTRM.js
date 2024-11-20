@@ -1,10 +1,10 @@
 let interactionCount = 1; // Current interaction count
 const maxInteractions = 4; // Maximum number of interactions
 const audioSources = [
-    "assets/audio/female us.MP3",
-    "assets/audio/female uk.MP3",
-    "assets/audio/male uk.MP3",
-    "assets/audio/male us.MP3",
+    "assets/audio/female_us.MP3",
+    "assets/audio/female_uk.MP3",
+    "assets/audio/male_uk.MP3",
+    "assets/audio/male_us.MP3",
 ];
 
 const step1 = document.getElementById("step-1");
@@ -17,7 +17,7 @@ const waveContainerRecording = document.getElementById("wave-container-recording
 const toStep4Btn = document.getElementById("to-step-4");
 const waveContainerPlayback = document.getElementById("wave-container-playback");
 const sliders = document.querySelectorAll("#step-4 input[type='range']");
-const audioElement = new Audio();
+let audioElement = null; // Will be dynamically created
 
 let isRecording = false;
 let mediaRecorder;
@@ -149,18 +149,35 @@ toStep4Btn.addEventListener("click", () => {
 // Play audio for interaction
 function playAudioForInteraction() {
     const audioSource = audioSources[interactionCount - 1]; // Get the correct audio source
-    if (audioSource) {
-        audioElement.src = audioSource;
-        audioElement.play();
-        audioElement.onended = () => {
-            toStep4Btn.disabled = false;
-            toStep4Btn.style.opacity = "1";
-        };
 
-        waveContainerPlayback.classList.remove("hidden");
-        toStep4Btn.disabled = true;
-        toStep4Btn.style.opacity = "0.5";
+    if (!audioSource) return;
+
+    // Create or reset the audio element
+    if (audioElement) {
+        audioElement.pause();
+        audioElement.remove();
     }
+
+    audioElement = new Audio(audioSource);
+    audioElement.volume = 1.0; // Ensure volume is at 100%
+    audioElement.play();
+
+    waveContainerPlayback.classList.remove("hidden");
+    toStep4Btn.disabled = true;
+    toStep4Btn.style.opacity = "0.5";
+
+    audioElement.onended = () => {
+        waveContainerPlayback.classList.add("hidden");
+        toStep4Btn.disabled = false;
+        toStep4Btn.style.opacity = "1";
+    };
+
+    audioElement.onerror = (e) => {
+        console.error("Audio playback error:", e);
+        waveContainerPlayback.classList.add("hidden");
+        toStep4Btn.disabled = false;
+        toStep4Btn.style.opacity = "1";
+    };
 }
 
 // Step 4: Slider Validation Logic
