@@ -227,12 +227,9 @@ submitBtn.addEventListener("click", (e) => {
 });
 
 // Complete button logic
-// Complete button logic
 completeBtn.addEventListener("click", () => {
-    // Go directly to the Thank You page after completing all interactions
     showThankYouPage();
 });
-
 
 // Display thank you page
 function showThankYouPage() {
