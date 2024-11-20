@@ -38,6 +38,25 @@ const questionnaireForm = document.getElementById("questionnaire");
 toStep2Btn.disabled = true;
 toStep2Btn.style.opacity = "0.5";
 
+// Validate if all questions are answered
+function validateQuestions() {
+    const allAnswered = Array.from(questionnaireForm.querySelectorAll("ul")).every((ul) => {
+        const radios = Array.from(ul.querySelectorAll("input[type='radio']"));
+        const selectedRadio = radios.find((radio) => radio.checked);
+        
+        if (selectedRadio && selectedRadio.value === "other") {
+            const otherInput = ul.querySelector("input[type='text']");
+            return otherInput && otherInput.value.trim() !== "";
+        }
+        
+        return !!selectedRadio; // Ensure a radio option is selected
+    });
+
+    // Enable the "Next" button if all questions are answered
+    toStep2Btn.disabled = !allAnswered;
+    toStep2Btn.style.opacity = allAnswered ? "1" : "0.5";
+}
+
 // Handle "Other" inputs logic
 function handleOtherInput(radioGroupName, textInputName) {
     const radios = document.querySelectorAll(`input[name='${radioGroupName}']`);
@@ -55,40 +74,19 @@ function handleOtherInput(radioGroupName, textInputName) {
             validateQuestions(); // Re-validate on radio selection change
         });
     });
+
+    if (textInput) {
+        textInput.addEventListener("input", validateQuestions); // Validate when text is entered
+    }
 }
 
 // Attach "Other" logic handlers
 handleOtherInput("assistant", "assistant-other");
 handleOtherInput("accent", "accent-other");
 
-// Validate all questions are answered
-function validateQuestions() {
-    const allAnswered = Array.from(questionnaireForm.querySelectorAll("ul")).every((ul) => {
-        const radios = ul.querySelectorAll("input[type='radio']");
-        const hasSelected = Array.from(radios).some((radio) => radio.checked);
-
-        // Check open-ended fields if "other" is selected
-        const otherField = ul.querySelector("input[type='text']");
-        if (otherField && !otherField.disabled) {
-            return hasSelected && otherField.value.trim() !== "";
-        }
-
-        return hasSelected;
-    });
-
-    // Enable the "Next" button if all questions are answered
-    toStep2Btn.disabled = !allAnswered;
-    toStep2Btn.style.opacity = allAnswered ? "1" : "0.5";
-}
-
 // Attach listeners to question inputs
 questionInputs.forEach((input) => {
     input.addEventListener("change", validateQuestions);
-});
-
-// Attach listeners to open-ended inputs for real-time validation
-openEndedInputs.forEach((input) => {
-    input.addEventListener("input", validateQuestions);
 });
 
 // Step 1: Handle Next Button Click
