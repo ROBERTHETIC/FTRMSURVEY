@@ -249,4 +249,17 @@ input[type="range"]::-moz-range-thumb {
     color: #333;
     margin-left: 5px;
 }
+/* Step 5: Thank You Page Styles */
+#step-5 h1 {
+    text-align: center;
+    margin-bottom: 20px;
+    font-size: 24px;
+    color: #333;
+}
 
+#step-5 p {
+    text-align: center;
+    margin-bottom: 10px;
+    font-size: 16px;
+    color: #555;
+}
