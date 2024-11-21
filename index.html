@@ -7,8 +7,137 @@
     <link rel="stylesheet" href="./FTRM.css">
 </head>
 <body>
+  <!-- Participant Consent Form -->
+<div id="participant-consent-form" class="container active">
+    <h1>Participant Consent Form</h1>
+    <p>Thank you for participating in this research! Before proceeding, please read the following information to ensure you understand the purpose, process, and your rights regarding this study.</p>
+    <h2>Purpose of the Study</h2>
+    <p>
+        This study aims to explore how the accent and gender of voice assistants affect users' trust in VA system.
+        Your participation will help us improve the design of voice assistants and enhance user experiences.
+    </p>
+    <h2>Study Procedure</h2>
+    <p>
+        The study will be conducted through a voice interaction website and will take approximately 10 minutes to complete.
+        You will interact with different voice assistants, followed by a series of questions and evaluations.
+        Participation is entirely voluntary, and you may withdraw at any time.
+    </p>
+    <h2>Data Privacy and Confidentiality</h2>
+    <p>
+        All your responses will be processed anonymously and used only for academic research purposes.
+        We will not collect any personally identifiable information (e.g., name, contact details).
+        All data will be securely stored on protected servers and will not be shared with any third parties.
+    </p>
+    <h2>Your Rights as a Participant</h2>
+    <p>
+        Participation in this study is entirely voluntary, and you may choose to withdraw at any time without providing a reason.
+        Choosing to withdraw will not result in any negative consequences for you.
+        If you have any questions or concerns, please contact the research team:
+    </p>
+    <ul>
+        <li>Linwei He (linwei.he24@imperial.ac.uk)</li>
+        <li>Ziyi Ma (ziyi.ma24@imperial.ac.uk)</li>
+        <li>Omar Elmaayergi (omar.elmaayergi24@imperial.ac.uk)</li>
+        <li>Yunting Zhu (yunting.zhu24@imperial.ac.uk)</li>
+        <li>Huiyu Lei (huiyu.lei24@imperial.ac.uk)</li>
+    </ul>
+    <h2>Potential Risks and Benefits</h2>
+    <p>
+        There are no significant risks associated with this study.
+        By participating, you will contribute to advancing voice assistant technology, which could benefit a wide range of users.
+    </p>
+    <h2>Consent to Participate</h2>
+    <p>If you agree to participate in this study and accept the terms outlined above, please click the “Agree and Continue” button to proceed.</p>
+    
+    <div class="buttons">
+        <button id="agree-btn" class="next-btn">Agree and Continue</button>
+        <button id="disagree-btn" class="next-btn">I Do Not Agree, Exit Study</button>
+    </div>
+</div>
+
+  <!-- Step 0: Participant ID Creation -->
+<div id="step-0" class="container hidden">
+    <h1>Welcome</h1>
+    <p>Please create a participant ID for this study (e.g., your initials + 3 digits of a random number, such as AB010).</p>
+    <p>This ID will be used to match your responses across different parts of the experiment.</p>
+
+    <div class="id-inputs">
+        <label for="initials">Your initials:</label>
+        <input type="text" id="initials" placeholder="Your initials" maxlength="2">
+        
+        <label for="random-number">3 digits number:</label>
+        <input type="text" id="random-number" placeholder="3 digits" maxlength="3" pattern="\d{3}">
+    </div>
+    <button id="generate-id-btn" class="next-btn" disabled>Generate ID</button>
+    <p id="generated-id" class="hidden"></p>
+    
+    <p>To better understand the results of this study, we would like to collect some basic demographic information about you. Your responses will remain anonymous and will only be used for academic purposes.</p>
+    <button type="button" id="to-step-instructions" class="next-btn" disabled>Next</button>
+</div>
+
+<!-- Step Instructions and Speaker Test -->
+<div id="step-instructions" class="container hidden">
+    <h1>Instructions</h1>
+    <p>In this study, you will:</p>
+    <ul>
+        <li>Ask a question to the voice assistant.</li>
+        <li>Listen to the answers from the four voice assistants (each played only once).</li>
+        <li>Rate the response based on three aspects:</li>
+        <ul>
+            <li><strong>Trustworthiness:</strong> Did the response seem accurate and honest?</li>
+            <li><strong>Reliability:</strong> Was the assistant dependable in addressing your question?</li>
+            <li><strong>Respect:</strong> Did the tone and manner of the response feel respectful?</li>
+        </ul>
+    </ul>
+    <p>
+        Use the 1–7 scale, taking “trustworthiness” for example, where 1 = Untrustworthy and 7 = Trustworthy. 
+        Please rate honestly based on your impressions.
+    </p>
+
+    <h2>Speaker Test</h2>
+    <p>Before we begin, let's ensure your audio setup is working correctly.</p>
+    <ul>
+        <li>Adjust the volume on your device to a comfortable level.</li>
+        <li>Press the "Play Test Sound" button below.</li>
+        <li>If you can hear the sound clearly, press "Next" to proceed.</li>
+        <li>If you cannot hear the sound, please check your device's audio settings before continuing.</li>
+    </ul>
+
+    <button type="button" id="play-test-sound-btn" class="btn next-btn circular-btn">Play Test Sound</button>
+    <button type="button" id="to-step-1" class="next-btn" disabled>Next</button>
+</div>
+  <div id="step-instructions" class="container hidden">
+    <h1>Instructions</h1>
+    <p>In this study, you will:</p>
+    <ul>
+        <li>Ask a question to the voice assistant.</li>
+        <li>Listen to the answers from the four voice assistants (each played only once).</li>
+        <li>Rate the response based on three aspects:</li>
+        <ul>
+            <li><strong>Trustworthiness:</strong> Did the response seem accurate and honest?</li>
+            <li><strong>Reliability:</strong> Was the assistant dependable in addressing your question?</li>
+            <li><strong>Respect:</strong> Did the tone and manner of the response feel respectful?</li>
+        </ul>
+    </ul>
+    <p>
+        Use the 1–7 scale, taking “trustworthiness” for example, where 1 = Untrustworthy and 7 = Trustworthy. 
+        Please rate honestly based on your impressions.
+    </p>
+
+    <h2>Speaker Test</h2>
+    <p>Before we begin, let's ensure your audio setup is working correctly.</p>
+    <ul>
+        <li>Adjust the volume on your device to a comfortable level.</li>
+        <li>Press the "Play Test Sound" button below.</li>
+        <li>If you can hear the sound clearly, press "Next" to proceed.</li>
+        <li>If you cannot hear the sound, please check your device's audio settings before continuing.</li>
+    </ul>
+
+    <button type="button" id="play-test-sound-btn" class="btn next-btn circular-btn">Play Test Sound</button>
+    <button type="button" id="to-step-1" class="next-btn" disabled>Next</button>
+</div>
     <!-- Step 1: Questionnaire -->
- <div id="step-1" class="container active">
+ <div id="step-1" class="container hidden">
    <form id="questionnaire">
     <h1>Step 1: Questionnaire</h1>
             <p> ① What is your age?</p>
@@ -152,11 +281,11 @@
         If you have any questions about this study or would like to know more about our research, please feel free to contact us:
     </p>
     <ul>
-        <li>Linwei He (linwei.he24@imperial.ac.uk)</li>
-        <li>Ziyi Ma (ziyi.ma24@imperial.ac.uk)</li>
-        <li>Omar Elmaayergi (omar.elmaayergi24@imperial.ac.uk)</li>
-        <li>Yunting Zhu (yunting.zhu24@imperial.ac.uk)</li>
-        <li>Huiyu Lei (huiyu.lei24@imperial.ac.uk)</li>
+          <li>Linwei He (linwei.he24@imperial.ac.uk)</li>
+          <li>Ziyi Ma (ziyi.ma24@imperial.ac.uk)</li>
+          <li>Omar Elmaayergi (omar.elmaayergi24@imperial.ac.uk)</li>
+          <li>Yunting Zhu (yunting.zhu24@imperial.ac.uk)</li>
+          <li>Huiyu Lei (huiyu.lei24@imperial.ac.uk)</li>
     </ul>
     <p>Your participation is greatly appreciated, and we hope you have a wonderful day!</p>
 </div>
