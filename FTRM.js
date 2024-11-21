@@ -20,6 +20,15 @@ const evaluationInstructions = [
     "Please use the provided scale to rate how you perceive the voice assistant VA-E2 on different aspects, such as trustworthiness, reliability, and respect.\nWhen the evaluation is complete, click “submit” to continue.",
     "Please use the provided scale to rate how you perceive the voice assistant VA-A2 on different aspects, such as trustworthiness, reliability, and respect.\nWhen the evaluation is complete, click “submit” to continue.\nWhen you have completed all four evaluations, please click “complete”."
 ];
+const step0 = document.getElementById("step-0");
+const stepInstructions = document.getElementById("step-instructions");
+const stepInstructionsPage = document.getElementById("step-instructions");
+const toStep1Btn = document.getElementById("to-step-1"); // 'Next' button on instructions page
+const testAudioButton = document.getElementById("play-test-sound-btn"); // 音频测试按钮
+const playTestSoundBtn = document.getElementById("play-test-sound-btn");
+console.log(playTestSoundBtn);
+const nextToStep2Btn = document.getElementById("next-to-step2-btn");
+const testAudio = new Audio("assets/audio/模拟.MP3"); // 替换为用户提供的文件路径
 const step1 = document.getElementById("step-1");
 const step2 = document.getElementById("step-2");
 const step3 = document.getElementById("step-3");
@@ -30,6 +39,10 @@ const waveContainerRecording = document.getElementById("wave-container-recording
 const toStep4Btn = document.getElementById("to-step-4");
 const waveContainerPlayback = document.getElementById("wave-container-playback");
 const sliders = document.querySelectorAll("#step-4 input[type='range']");
+const initialsInput = document.getElementById("initials");
+const randomNumberInput = document.getElementById("random-number");
+const generateIdBtn = document.getElementById("generate-id-btn");
+const generatedIdText = document.getElementById("generated-id");
 let audioElement = null; // Dynamically created for playback
 let isRecording = false;
 let mediaRecorder;
@@ -62,7 +75,114 @@ const completeBtn = document.getElementById("complete-btn");
 completeBtn.disabled = true;
 completeBtn.style.opacity = "0.5";
 completeBtn.classList.add("hidden");
+document.addEventListener("DOMContentLoaded", () => {
+    const consentForm = document.getElementById("participant-consent-form");
+    const exitPage = document.getElementById("step-5"); // Assuming step-5 is the exit page
+    const agreeBtn = document.getElementById("agree-btn");
+    const disagreeBtn = document.getElementById("disagree-btn");
+    const initialsInput = document.getElementById("initials");
+    const randomNumberInput = document.getElementById("random-number");
+    const generateIdBtn = document.getElementById("generate-id-btn");
+    const generatedIdText = document.getElementById("generated-id");
+    const toStepInstructionsBtn = document.getElementById("to-step-instructions");
+    const step0 = document.getElementById("step-0");
+    const stepInstructions = document.getElementById("step-instructions");
 
+    // Enable Generate ID button when both fields are filled
+    [initialsInput, randomNumberInput].forEach((input) => {
+        input.addEventListener("input", () => {
+            const initials = initialsInput.value.trim();
+            const randomNumber = randomNumberInput.value.trim();
+            generateIdBtn.disabled = !(initials.length === 2 && /^[A-Za-z]+$/.test(initials) && randomNumber.length === 3 && /^[0-9]+$/.test(randomNumber));
+        });
+    });
+ // Agree button: Navigate to Step 0
+    agreeBtn.addEventListener("click", () => {
+        consentForm.classList.add("hidden"); // Hide Consent Form
+        step0.classList.remove("hidden"); // Show Step 0
+        console.log("Navigated to Step 0.");
+    });
+
+    // Disagree button: Navigate to Exit Page
+    disagreeBtn.addEventListener("click", () => {
+        consentForm.classList.add("hidden"); // Hide Consent Form
+        exitPage.classList.remove("hidden"); // Show Exit Page
+        console.log("Exited to the Exit Page.");
+    });
+    // Generate ID and enable Next button
+    generateIdBtn.addEventListener("click", () => {
+        const initials = initialsInput.value.trim().toUpperCase();
+        const randomNumber = randomNumberInput.value.trim();
+        const participantId = `${initials}${randomNumber}`;
+        generatedIdText.textContent = `Hi, ${participantId}`;
+        generatedIdText.classList.remove("hidden");
+        toStepInstructionsBtn.disabled = false;
+        toStepInstructionsBtn.style.opacity = "1"; // Optional: style adjustment
+    });
+
+    // Navigate to Step Instructions
+    toStepInstructionsBtn.addEventListener("click", () => {
+        step0.classList.add("hidden"); // Hide Welcome page
+        stepInstructions.classList.remove("hidden"); // Show Instructions page
+        console.log("Navigated to Instructions page.");
+    });
+});
+// 初始状态禁用 Next 按钮
+toStep1Btn.disabled = true;
+toStep1Btn.style.opacity = "0.5";
+// 初始化状态变量
+let testAudioPlaying = false; // 是否正在播放音频
+let testAudioPlayed = false; // 是否至少播放过一次音频
+
+// 模拟音频播放逻辑（无资源）
+playTestSoundBtn.addEventListener("click", () => {
+    console.log("Play Test Sound button clicked."); // 调试日志
+
+    if (!testAudioPlaying) {
+        // 播放音频
+        testAudio.play()
+            .then(() => {
+                testAudioPlaying = true; // 更新播放状态
+                playTestSoundBtn.textContent = "Pause Test Sound"; // 更新按钮文本
+                console.log("Audio is playing...");
+            })
+            .catch((error) => {
+                console.error("Error playing audio:", error); // 捕获播放错误
+            });
+    } else {
+        // 暂停音频
+        testAudio.pause();
+        testAudioPlaying = false; // 更新播放状态
+        playTestSoundBtn.textContent = "Play Test Sound"; // 更新按钮文本
+        console.log("Audio is paused.");
+    }
+});
+// 音频播放结束逻辑
+testAudio.onended = () => {
+    console.log("Audio playback ended."); // 日志
+    testAudioPlaying = false; // 重置播放状态
+    playTestSoundBtn.textContent = "Play Test Sound"; // 重置按钮文本
+    testAudioPlayed = true; // 标记音频已播放过一次
+    enableNextButton(); // 启用 Next 按钮
+};
+
+// 启用 Next 按钮逻辑
+function enableNextButton() {
+    console.log("Enabling Next button...");
+    toStep1Btn.disabled = false; // 启用按钮
+    toStep1Btn.style.opacity = "1"; // 更新样式
+}
+
+// 禁用 Next 按钮（初始状态）
+toStep1Btn.disabled = true;
+toStep1Btn.style.opacity = "0.5";
+
+// Next 按钮跳转逻辑
+toStep1Btn.addEventListener("click", () => {
+    console.log("Navigating to Step 1...");
+    document.getElementById("step-instructions").classList.add("hidden"); // 隐藏当前页面
+    document.getElementById("step-1").classList.remove("hidden"); // 显示 Step 1 页面
+});
 // Step 1: Questionnaire Logic
 const questionInputs = document.querySelectorAll("#step-1 input[type='radio']");
 const openEndedInputs = document.querySelectorAll("#step-1 input[type='text']");
