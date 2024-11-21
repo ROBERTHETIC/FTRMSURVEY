@@ -263,3 +263,14 @@ input[type="range"]::-moz-range-thumb {
     font-size: 16px;
     color: #555;
 }
+#step-5 ul {
+    list-style-type: none; /* 去掉列表前的圆点 */
+    padding: 0; /* 移除默认内边距 */
+    text-align: center; /* 水平居中 */
+    margin: 0 auto; /* 水平居中调整 */
+}
+
+#step-5 ul li {
+    margin: 5px 0; /* 每行之间的间距 */
+    font-size: 16px; /* 调整字体大小 */
+}
