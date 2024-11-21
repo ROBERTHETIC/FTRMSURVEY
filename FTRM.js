@@ -28,7 +28,7 @@ const testAudioButton = document.getElementById("play-test-sound-btn"); // 音�
 const playTestSoundBtn = document.getElementById("play-test-sound-btn");
 console.log(playTestSoundBtn);
 const nextToStep2Btn = document.getElementById("next-to-step2-btn");
-const testAudio = new Audio("assets/audio/模拟.MP3"); // 替换为用户提供的文件路径
+const testAudio = new Audio("assets/audio/模拟缩短.MP3"); // 替换为用户提供的文件路径
 const step1 = document.getElementById("step-1");
 const step2 = document.getElementById("step-2");
 const step3 = document.getElementById("step-3");
@@ -76,6 +76,8 @@ completeBtn.disabled = true;
 completeBtn.style.opacity = "0.5";
 completeBtn.classList.add("hidden");
 document.addEventListener("DOMContentLoaded", () => {
+    const toggleInfoBtn = document.getElementById("toggle-info-btn");
+    const detailedInfo = document.getElementById("detailed-info");
     const consentForm = document.getElementById("participant-consent-form");
     const exitPage = document.getElementById("step-5"); // Assuming step-5 is the exit page
     const agreeBtn = document.getElementById("agree-btn");
@@ -87,44 +89,52 @@ document.addEventListener("DOMContentLoaded", () => {
     const toStepInstructionsBtn = document.getElementById("to-step-instructions");
     const step0 = document.getElementById("step-0");
     const stepInstructions = document.getElementById("step-instructions");
-
-    // Enable Generate ID button when both fields are filled
-    [initialsInput, randomNumberInput].forEach((input) => {
-        input.addEventListener("input", () => {
-            const initials = initialsInput.value.trim();
-            const randomNumber = randomNumberInput.value.trim();
-            generateIdBtn.disabled = !(initials.length === 2 && /^[A-Za-z]+$/.test(initials) && randomNumber.length === 3 && /^[0-9]+$/.test(randomNumber));
-        });
+// Toggle detailed information
+    toggleInfoBtn.addEventListener("click", () => {
+        if (detailedInfo.style.display === "none") {
+            detailedInfo.style.display = "block";
+            toggleInfoBtn.textContent = "Hide Details";
+        } else {
+            detailedInfo.style.display = "none";
+            toggleInfoBtn.textContent = "Show Details";
+        }
     });
- // Agree button: Navigate to Step 0
+
+ // Agree button logic: Transition to Step 0
     agreeBtn.addEventListener("click", () => {
-        consentForm.classList.add("hidden"); // Hide Consent Form
+        consentForm.classList.add("hidden"); // Hide the Consent Form
         step0.classList.remove("hidden"); // Show Step 0
-        console.log("Navigated to Step 0.");
+        console.log("Navigated to Step 0."); // Debugging log
     });
 
-    // Disagree button: Navigate to Exit Page
+    // Disagree button logic: Exit the study
     disagreeBtn.addEventListener("click", () => {
-        consentForm.classList.add("hidden"); // Hide Consent Form
-        exitPage.classList.remove("hidden"); // Show Exit Page
-        console.log("Exited to the Exit Page.");
+        alert("You chose not to participate. Exiting the study.");
+        // Optional: Redirect to an exit page or provide more feedback
     });
-    // Generate ID and enable Next button
+
+    // Enable Generate ID button only when initials input is valid
+    initialsInput.addEventListener("input", () => {
+        const initials = initialsInput.value.trim();
+        const isValid = initials.length === 2 && /^[A-Za-z]+$/.test(initials);
+        generateIdBtn.disabled = !isValid; // Disable button if initials are not valid
+    });
+
+    // Generate ID logic
     generateIdBtn.addEventListener("click", () => {
         const initials = initialsInput.value.trim().toUpperCase();
-        const randomNumber = randomNumberInput.value.trim();
-        const participantId = `${initials}${randomNumber}`;
-        generatedIdText.textContent = `Hi, ${participantId}`;
-        generatedIdText.classList.remove("hidden");
-        toStepInstructionsBtn.disabled = false;
-        toStepInstructionsBtn.style.opacity = "1"; // Optional: style adjustment
+        generatedIdText.textContent = `Your Participant ID: ${initials}`;
+        generatedIdText.classList.remove("hidden"); // Show generated ID
+        toStepInstructionsBtn.disabled = false; // Enable "Next" button
+        toStepInstructionsBtn.style.opacity = "1"; // Visually activate the button
+        console.log(`Generated ID: ${initials}`); // Debugging log
     });
 
-    // Navigate to Step Instructions
+    // Navigate to the Instructions page
     toStepInstructionsBtn.addEventListener("click", () => {
-        step0.classList.add("hidden"); // Hide Welcome page
+        step0.classList.add("hidden"); // Hide Step 0
         stepInstructions.classList.remove("hidden"); // Show Instructions page
-        console.log("Navigated to Instructions page.");
+        console.log("Navigated to Instructions page."); // Debugging log
     });
 });
 // 初始状态禁用 Next 按钮
