@@ -274,3 +274,28 @@ input[type="range"]::-moz-range-thumb {
     margin: 5px 0; /* 每行之间的间距 */
     font-size: 16px; /* 调整字体大小 */
 }
+#toggle-info-btn {
+    display: inline-block;
+    padding: 12px 24px;
+    font-size: 16px;
+    font-weight: bold;
+    color: #fff;
+    background: linear-gradient(90deg, #4CAF50, #81C784); /* Gradient background */
+    border: none;
+    border-radius: 25px; /* Rounded corners */
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2); /* Button shadow */
+    cursor: pointer;
+    transition: all 0.3s ease; /* Smooth hover effects */
+    margin-top: 20px;
+}
+
+#toggle-info-btn:hover {
+    background: linear-gradient(90deg, #81C784, #4CAF50); /* Reverse gradient on hover */
+    transform: scale(1.05); /* Slightly enlarge on hover */
+    box-shadow: 0 6px 15px rgba(0, 0, 0, 0.3); /* More pronounced shadow */
+}
+
+#toggle-info-btn:active {
+    transform: scale(0.95); /* Slightly shrink on click */
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2); /* Smaller shadow on click */
+}
