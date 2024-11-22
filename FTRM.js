@@ -103,13 +103,12 @@ document.addEventListener("DOMContentLoaded", () => {
     });
 
 // Disagree button logic: Exit the study
-    disagreeBtn.addEventListener("click", () => {
-        alert("You chose not to participate. Exiting the study.");
-        consentForm.classList.add("hidden"); // Hide Consent Form
-        exitPage.classList.remove("hidden"); // Show Exit Page (Step 5)
-        console.log("Navigated to Exit Page.");
-    });
-
+disagreeBtn.addEventListener("click", () => {
+    alert("You chose not to participate. Exiting the study.");
+    consentForm.classList.add("hidden"); // Hide Consent Form
+    exitPage.classList.remove("hidden"); // Show Exit Page (Step 5)
+    console.log("Navigated to Exit Page.");
+});
 
     // Enable Generate ID button only when initials input is valid
     initialsInput.addEventListener("input", () => {
@@ -299,7 +298,6 @@ recordBtn.addEventListener("click", async () => {
     }
 });
 
-
 // Step 3: Add dynamic playback instruction
 const playbackInstructionElement = document.createElement("p");
 playbackInstructionElement.className = "playback-instruction";
@@ -372,6 +370,7 @@ sliders.forEach((slider) => {
         valueDisplay.textContent = slider.value; // Update the centered value dynamically
         validateSliders(); // Validate sliders after updating the value
     });
+});
 
 // Validate sliders
 function validateSliders() {
@@ -421,5 +420,7 @@ function showThankYouPage() {
     const step5 = document.getElementById("step-5");
     step5.classList.remove("hidden");
 
+    console.log("Thank you page displayed."); // Debugging log
+}
     console.log("Thank you page displayed."); // Debugging log
 }
