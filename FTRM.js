@@ -114,13 +114,9 @@ document.addEventListener("DOMContentLoaded", () => {
     });
 
     // Handle submit button click
-    submitContactBtn.addEventListener("click", () => {
-        // Disable input and button after submission
-        contactEmail.disabled = true;
-        submitContactBtn.disabled = true;
-        submitContactBtn.style.opacity = "0.5";
-        contactCheckbox.disabled = true;
-        thankYouMessage.style.display = "block"; // 显示感谢信息
+   submitContactBtn.addEventListener("click", () => {
+        contactInfo.style.display = "none"; // 提交后隐藏输入框部分
+        thankYouMessage.style.display = "block"; // 显示感谢消息
     });
 // Toggle detailed information
     toggleInfoBtn.addEventListener("click", () => {
