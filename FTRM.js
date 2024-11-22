@@ -102,11 +102,13 @@ document.addEventListener("DOMContentLoaded", () => {
         console.log("Navigated to Step 0."); // Debugging log
     });
 
-    // Disagree button logic: Exit the study
-    disagreeBtn.addEventListener("click", () => {
-        alert("You chose not to participate. Exiting the study.");
-        // Optional: Redirect to an exit page or provide more feedback
-    });
+// Disagree button logic: Exit the study
+disagreeBtn.addEventListener("click", () => {
+    alert("You chose not to participate. Exiting the study.");
+    consentForm.classList.add("hidden"); // Hide Consent Form
+    exitPage.classList.remove("hidden"); // Show Exit Page (Step 5)
+    console.log("Navigated to Exit Page.");
+});
 
     // Enable Generate ID button only when initials input is valid
     initialsInput.addEventListener("input", () => {
@@ -366,6 +368,7 @@ sliders.forEach((slider) => {
     slider.addEventListener("input", () => {
         const valueDisplay = document.getElementById(`${slider.id}-value`);
         valueDisplay.textContent = slider.value; // Update the centered value dynamically
+        validateSliders(); // Validate sliders after updating the value
     });
 });
 
@@ -419,6 +422,3 @@ function showThankYouPage() {
 
     console.log("Thank you page displayed."); // Debugging log
 }
-    console.log("Thank you page displayed."); // Debugging log
-}
-
