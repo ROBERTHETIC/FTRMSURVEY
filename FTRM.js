@@ -363,10 +363,9 @@ submitBtn.style.opacity = "0.5";
 
 // Real-time slider value update and validation
 sliders.forEach((slider) => {
-    const valueDisplay = document.getElementById(`${slider.id}-value`);
     slider.addEventListener("input", () => {
-        valueDisplay.textContent = slider.value;
-        validateSliders();
+        const valueDisplay = document.getElementById(`${slider.id}-value`);
+        valueDisplay.textContent = slider.value; // Update the centered value dynamically
     });
 });
 
