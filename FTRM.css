@@ -307,3 +307,10 @@ input[type="range"]::-moz-range-thumb {
     transform: scale(0.95); /* Slightly shrink on click */
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2); /* Smaller shadow on click */
 }
+.slider-value {
+    text-align: center;
+    font-size: 1.5rem; /* Increase the font size */
+    margin-top: 10px; /* Add some spacing above the value */
+    color: #333; /* Use a neutral color */
+    font-weight: bold; /* Make the text bold */
+}
