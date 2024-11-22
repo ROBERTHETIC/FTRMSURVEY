@@ -401,36 +401,30 @@ submitBtn.addEventListener("click", (e) => {
     if (interactionCount < maxInteractions) {
         interactionCount++;
 
+        // Reset step 4 and navigate back to step 3
         step4.classList.add("hidden");
         step3.classList.remove("hidden");
-        playAudioForInteraction();
+        playAudioForInteraction(); // Replay the next interaction audio
     } else if (interactionCount === maxInteractions) {
-        submitBtn.classList.add("hidden");
-        completeBtn.disabled = false;
-        completeBtn.style.opacity = "1";
-        completeBtn.classList.remove("hidden");
+        // On the final (4th) submission, navigate directly to step 5
+        showThankYouPage();
     }
 });
 
-// Complete button logic
-completeBtn.addEventListener("click", () => {
-    showThankYouPage();
-});
-
-// 获取第五页元素
-const step5 = document.getElementById("step-5");
-
-// 完成按钮逻辑，跳转到第五页
-completeBtn.addEventListener("click", () => {
-    // 隐藏所有页面
+// Function to display the Thank You page (step 5)
+function showThankYouPage() {
+    // Hide all other steps
     step1.classList.add("hidden");
     step2.classList.add("hidden");
     step3.classList.add("hidden");
     step4.classList.add("hidden");
 
-    // 显示第五页
+    // Display step 5
+    const step5 = document.getElementById("step-5");
     step5.classList.remove("hidden");
-});
+
+    console.log("Thank you page displayed."); // Debugging log
+}
 
 // 确保第五页的显示函数无重复
 function showThankYouPage() {
