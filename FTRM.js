@@ -84,12 +84,6 @@ document.addEventListener("DOMContentLoaded", () => {
     const toStepInstructionsBtn = document.getElementById("to-step-instructions");
     const step0 = document.getElementById("step-0");
     const stepInstructions = document.getElementById("step-instructions");
-    const contactInfoCheckbox = document.getElementById("contact-info-checkbox");
-    const contactInfoForm = document.getElementById("contact-info-form");
-    const contactNameInput = document.getElementById("contact-name");
-    const contactEmailInput = document.getElementById("contact-email");
-    const contactSubmitBtn = document.getElementById("contact-submit-btn");
-    const contactThankYou = document.getElementById("contact-thank-you");
 // Toggle detailed information
     toggleInfoBtn.addEventListener("click", () => {
         if (detailedInfo.style.display === "none") {
@@ -108,13 +102,11 @@ document.addEventListener("DOMContentLoaded", () => {
         console.log("Navigated to Step 0."); // Debugging log
     });
 
-// Disagree button logic: Exit the study
-disagreeBtn.addEventListener("click", () => {
-    alert("You chose not to participate. Exiting the study.");
-    consentForm.classList.add("hidden"); // Hide Consent Form
-    exitPage.classList.remove("hidden"); // Show Exit Page (Step 5)
-    console.log("Navigated to Exit Page.");
-});
+    // Disagree button logic: Exit the study
+    disagreeBtn.addEventListener("click", () => {
+        alert("You chose not to participate. Exiting the study.");
+        // Optional: Redirect to an exit page or provide more feedback
+    });
 
     // Enable Generate ID button only when initials input is valid
     initialsInput.addEventListener("input", () => {
@@ -170,34 +162,6 @@ playTestSoundBtn.addEventListener("click", () => {
         console.log("Audio is paused.");
     }
 });
-// Toggle contact information form
-        contactInfoCheckbox.addEventListener("change", () => {
-            if (contactInfoCheckbox.checked) {
-                contactInfoForm.classList.remove("hidden");
-            } else {
-                contactInfoForm.classList.add("hidden");
-                contactSubmitBtn.disabled = true;
-                contactNameInput.value = "";
-                contactEmailInput.value = "";
-                contactThankYou.classList.add("hidden");
-            }
-        });
-        
-    // Enable submit button if name and email are filled
-        contactNameInput, contactEmailInput].forEach(input => {
-            input.addEventListener("input", () => {
-                const isFormValid = contactNameInput.value.trim() !== "" && contactEmailInput.value.trim() !== "";
-                contactSubmitBtn.disabled = !isFormValid;
-            });
-        });
-        
-    // Handle submit button click
-        contactSubmitBtn.addEventListener("click", () => {
-            contactSubmitBtn.disabled = true;
-            contactInfoForm.classList.add("hidden");
-            contactThankYou.classList.remove("hidden");
-        });
-    });    
 // 音频播放结束逻辑
 testAudio.onended = () => {
     console.log("Audio playback ended."); // 日志
@@ -402,7 +366,6 @@ sliders.forEach((slider) => {
     slider.addEventListener("input", () => {
         const valueDisplay = document.getElementById(`${slider.id}-value`);
         valueDisplay.textContent = slider.value; // Update the centered value dynamically
-        validateSliders(); // Validate sliders after updating the value
     });
 });
 
@@ -454,6 +417,8 @@ function showThankYouPage() {
     const step5 = document.getElementById("step-5");
     step5.classList.remove("hidden");
 
+    console.log("Thank you page displayed."); // Debugging log
+}
     console.log("Thank you page displayed."); // Debugging log
 }
 
