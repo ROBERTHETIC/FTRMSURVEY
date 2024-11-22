@@ -401,7 +401,7 @@ submitBtn.addEventListener("click", (e) => {
     if (interactionCount < maxInteractions) {
         interactionCount++;
 
-        // Reset step 4 and navigate back to step 3
+        // Reset step 4 and navigate back to step 3 for the next interaction
         step4.classList.add("hidden");
         step3.classList.remove("hidden");
         playAudioForInteraction(); // Replay the next interaction audio
@@ -411,16 +411,30 @@ submitBtn.addEventListener("click", (e) => {
     }
 });
 
+// Function to play audio for the current interaction
+function playAudioForInteraction() {
+    const audioSource = audioSources[interactionCount - 1]; // Get the correct audio source
+    const audioElement = new Audio(audioSource);
+
+    audioElement.volume = 1.0; // Ensure volume is at 100%
+    audioElement.play();
+
+    audioElement.onended = () => {
+        console.log("Audio playback ended for interaction:", interactionCount);
+    };
+
+    audioElement.onerror = (e) => {
+        console.error("Audio playback error:", e);
+    };
+}
+
 // Function to display the Thank You page (step 5)
 function showThankYouPage() {
     // Hide all other steps
-    step1.classList.add("hidden");
-    step2.classList.add("hidden");
     step3.classList.add("hidden");
     step4.classList.add("hidden");
 
     // Display step 5
-    const step5 = document.getElementById("step-5");
     step5.classList.remove("hidden");
 
     console.log("Thank you page displayed."); // Debugging log
