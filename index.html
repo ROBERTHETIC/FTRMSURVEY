@@ -265,7 +265,7 @@
     </form>
 </div>
 
-  <!-- Step 5: Thank You Page -->
+<!-- Step 5: Thank You Page -->
 <div id="step-5" class="container hidden">
     <h1>Thank You!</h1>
     <p>
@@ -275,13 +275,26 @@
         If you have any questions about this study or would like to know more about our research, please feel free to contact us:
     </p>
     <ul>
-          <li>Linwei He (linwei.he24@imperial.ac.uk)</li>
-          <li>Ziyi Ma (ziyi.ma24@imperial.ac.uk)</li>
-          <li>Omar Elmaayergi (omar.elmaayergi24@imperial.ac.uk)</li>
-          <li>Yunting Zhu (yunting.zhu24@imperial.ac.uk)</li>
-          <li>Huiyu Lei (huiyu.lei24@imperial.ac.uk)</li>
+        <li>Linwei He (linwei.he24@imperial.ac.uk)</li>
+        <li>Ziyi Ma (ziyi.ma24@imperial.ac.uk)</li>
+        <li>Omar Elmaayergi (omar.elmaayergi24@imperial.ac.uk)</li>
+        <li>Yunting Zhu (yunting.zhu24@imperial.ac.uk)</li>
+        <li>Huiyu Lei (huiyu.lei24@imperial.ac.uk)</li>
     </ul>
     <p>Your participation is greatly appreciated, and we hope you have a wonderful day!</p>
+
+    <!-- Optional Contact Information Section -->
+    <div class="optional-contact">
+        <label>
+            <input type="checkbox" id="contact-checkbox">
+            Please leave your contact information for us to contact you later (optional)
+        </label>
+        <div id="contact-info" class="hidden">
+            <input type="email" id="contact-email" placeholder="Enter your email address">
+            <button id="submit-contact-btn" class="next-btn" disabled>Submit</button>
+        </div>
+    </div>
+    <p id="thank-you-message" class="hidden">Thank you for providing your contact information! We look forward to getting in touch with you for future interviews.</p>
 </div>
     <script src="./FTRM.js" defer></script>
 </html>
