@@ -6,6 +6,7 @@ const audioSources = [
     "assets/audio/male_uk.MP3",
     "assets/audio/male_us.MP3",
 ];
+
 // Playback instructions for each interaction
 const playbackInstructions = [
     "The voice assistant VA-A1 is responding to your question. Please listen to the response below carefully, the audio will only be played once.",
@@ -70,6 +71,11 @@ toStep4Btn.addEventListener("click", () => {
     resetSlidersForNextInteraction(); // Reset sliders
 });
 document.addEventListener("DOMContentLoaded", () => {
+    const contactCheckbox = document.getElementById("contact-checkbox");
+    const contactInfo = document.getElementById("contact-info");
+    const contactEmail = document.getElementById("contact-email");
+    const submitContactBtn = document.getElementById("submit-contact-btn");
+    const thankYouMessage = document.getElementById("thank-you-message");
     const toggleInfoBtn = document.getElementById("toggle-info-btn");
     const detailedInfo = document.getElementById("detailed-info");
     const consentForm = document.getElementById("participant-consent-form");
@@ -83,6 +89,37 @@ document.addEventListener("DOMContentLoaded", () => {
     const toStepInstructionsBtn = document.getElementById("to-step-instructions");
     const step0 = document.getElementById("step-0");
     const stepInstructions = document.getElementById("step-instructions");
+// Toggle contact info input visibility
+    contactCheckbox.addEventListener("change", () => {
+        if (contactCheckbox.checked) {
+            contactInfo.classList.remove("hidden");
+        } else {
+            contactInfo.classList.add("hidden");
+            contactEmail.value = ""; // Clear email input
+            submitContactBtn.disabled = true; // Disable submit button
+        }
+    });
+
+    // Enable submit button if email input is filled
+    contactEmail.addEventListener("input", () => {
+        if (contactEmail.value.trim() !== "") {
+            submitContactBtn.disabled = false;
+            submitContactBtn.style.opacity = "1";
+        } else {
+            submitContactBtn.disabled = true;
+            submitContactBtn.style.opacity = "0.5";
+        }
+    });
+
+    // Handle submit button click
+    submitContactBtn.addEventListener("click", () => {
+        // Disable input and button after submission
+        contactEmail.disabled = true;
+        submitContactBtn.disabled = true;
+        submitContactBtn.style.opacity = "0.5";
+        contactCheckbox.disabled = true;
+        thankYouMessage.classList.remove("hidden");
+    });
 // Toggle detailed information
     toggleInfoBtn.addEventListener("click", () => {
         if (detailedInfo.style.display === "none") {
@@ -396,6 +433,7 @@ function resetSlidersForNextInteraction() {
         const valueDisplay = document.getElementById(`${slider.id}-value`);
         valueDisplay.textContent = slider.value; // Update displayed value to reset
     });
+
 
     submitBtn.disabled = true;
     submitBtn.style.opacity = "0.5";
