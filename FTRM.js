@@ -18,7 +18,7 @@ const evaluationInstructions = [
     "Please use the provided scale to rate how you perceive the voice assistant VA-A1 on different aspects, such as trustworthiness, reliability, and respect.\nWhen the evaluation is complete, click “submit” to continue.",
     "Please use the provided scale to rate how you perceive the voice assistant VA-E1 on different aspects, such as trustworthiness, reliability, and respect.\nWhen the evaluation is complete, click “submit” to continue.",
     "Please use the provided scale to rate how you perceive the voice assistant VA-E2 on different aspects, such as trustworthiness, reliability, and respect.\nWhen the evaluation is complete, click “submit” to continue.",
-    "Please use the provided scale to rate how you perceive the voice assistant VA-A2 on different aspects, such as trustworthiness, reliability, and respect.\nWhen the evaluation is complete, click “submit” to continue.\nWhen you have completed all four evaluations, please click “complete”."
+    "Please use the provided scale to rate how you perceive the voice assistant VA-A2 on different aspects, such as trustworthiness, reliability, and respect.\nWhen the evaluation is complete, click “submit” to continue."
 ];
 const step0 = document.getElementById("step-0");
 const stepInstructions = document.getElementById("step-instructions");
@@ -70,11 +70,6 @@ toStep4Btn.addEventListener("click", () => {
     updateEvaluationInstruction(); // Update instruction
     resetSlidersForNextInteraction(); // Reset sliders
 });
-// Disable Complete button initially
-const completeBtn = document.getElementById("complete-btn");
-completeBtn.disabled = true;
-completeBtn.style.opacity = "0.5";
-completeBtn.classList.add("hidden");
 document.addEventListener("DOMContentLoaded", () => {
     const toggleInfoBtn = document.getElementById("toggle-info-btn");
     const detailedInfo = document.getElementById("detailed-info");
@@ -132,7 +127,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
     // Navigate to the Instructions page
     toStepInstructionsBtn.addEventListener("click", () => {
-        step0.classList.add("hidden"); // Hide Step 0
+        step0.classList.add("hidden");
         stepInstructions.classList.remove("hidden"); // Show Instructions page
         console.log("Navigated to Instructions page."); // Debugging log
     });
@@ -425,18 +420,3 @@ function showThankYouPage() {
 
     console.log("Thank you page displayed."); // Debugging log
 }
-
-// 确保第五页的显示函数无重复
-function showThankYouPage() {
-    // 隐藏其他页面
-    step1.classList.add("hidden");
-    step2.classList.add("hidden");
-    step3.classList.add("hidden");
-    step4.classList.add("hidden");
-
-    // 显示第五页
-    step5.classList.remove("hidden");
-}
-
-// 替换多余的逻辑
-completeBtn.addEventListener("click", showThankYouPage);
