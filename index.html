@@ -213,58 +213,51 @@
         </div>
         <button type="button" id="to-step-4" class="next-btn">Next</button>
     </div>
-   <div id="step-4" class="container hidden">
+    <!-- Step 4: Evaluation -->
+  <div id="step-4" class="container hidden">
     <h1>Step 4: Evaluation</h1>
     <form id="evaluation">
         <div class="slider-row">
             <div class="slider-label">
                 <span class="left-label">Untrustworthy</span>
                 <input type="range" id="trustworthy" name="trustworthy" min="1" max="7" step="1">
-                <span class="right-label">Trustworthy</span>
+                <span class="right-label">Trustworthy<span class="current-value" id="trustworthy-value">4</span></span>
             </div>
             <div class="slider-scale">
                 <span class="scale-label">1</span>
                 <span class="scale-label">7</span>
             </div>
-            <div class="slider-value-container">
-                <span class="slider-value" id="trustworthy-value">4</span>
-            </div>
+            <div class="slider-value" id="trustworthy-value">4</div>
         </div>
 
         <div class="slider-row">
             <div class="slider-label">
                 <span class="left-label">Unreliable</span>
                 <input type="range" id="reliable" name="reliable" min="1" max="7" step="1">
-                <span class="right-label">Reliable</span>
+                <span class="right-label">Reliable<span class="current-value" id="reliable-value">4</span></span>
             </div>
             <div class="slider-scale">
                 <span class="scale-label">1</span>
                 <span class="scale-label">7</span>
             </div>
-            <div class="slider-value-container">
-                <span class="slider-value" id="reliable-value">4</span>
-            </div>
+            <div class="slider-value" id="reliable-value">4</div>
         </div>
 
         <div class="slider-row">
             <div class="slider-label">
                 <span class="left-label">Disrespectful</span>
                 <input type="range" id="respectful" name="respectful" min="1" max="7" step="1">
-                <span class="right-label">Respectful</span>
+                <span class="right-label">Respectful<span class="current-value" id="respectful-value">4</span></span>
             </div>
             <div class="slider-scale">
                 <span class="scale-label">1</span>
                 <span class="scale-label">7</span>
             </div>
-            <div class="slider-value-container">
-                <span class="slider-value" id="respectful-value">4</span>
-            </div>
+            <div class="slider-value" id="respectful-value">4</div>
         </div>
-
         <button type="submit" class="submit-btn" disabled>Submit</button>
     </form>
 </div>
-
   <!-- Step 5: Thank You Page -->
 <div id="step-5" class="container hidden">
     <h1>Thank You!</h1>
