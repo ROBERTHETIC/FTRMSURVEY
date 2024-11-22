@@ -368,22 +368,25 @@ sliders.forEach((slider) => {
     slider.addEventListener("input", () => {
         const valueDisplay = document.getElementById(`${slider.id}-value`);
         valueDisplay.textContent = slider.value; // Update the centered value dynamically
+        validateSliders(); // Validate sliders each time a value changes
     });
 });
 
-// Validate sliders
+// Function to validate sliders and enable the submit button
 function validateSliders() {
-    const allMoved = Array.from(sliders).every((slider) => slider.value !== slider.defaultValue);
+    // Check if all sliders are moved from their default values (e.g., "4")
+    const allMoved = Array.from(sliders).every((slider) => slider.value !== "4");
 
+    // Enable or disable the submit button based on the sliders' state
     submitBtn.disabled = !allMoved;
     submitBtn.style.opacity = allMoved ? "1" : "0.5";
 }
-
 // Reset sliders for the next interaction
 function resetSlidersForNextInteraction() {
     sliders.forEach((slider) => {
-        slider.value = 4; // 默认值4
-        document.getElementById(`${slider.id}-value`).textContent = slider.value;
+        slider.value = "4"; // Reset to default value "4"
+        const valueDisplay = document.getElementById(`${slider.id}-value`);
+        valueDisplay.textContent = slider.value; // Update displayed value to reset
     });
 
     submitBtn.disabled = true;
