@@ -84,6 +84,40 @@ document.addEventListener("DOMContentLoaded", () => {
     const toStepInstructionsBtn = document.getElementById("to-step-instructions");
     const step0 = document.getElementById("step-0");
     const stepInstructions = document.getElementById("step-instructions");
+    const contactInfoCheckbox = document.getElementById("contact-info-checkbox");
+    const contactInfoForm = document.getElementById("contact-info-form");
+    const contactNameInput = document.getElementById("contact-name");
+    const contactEmailInput = document.getElementById("contact-email");
+    const contactSubmitBtn = document.getElementById("contact-submit-btn");
+    const contactThankYou = document.getElementById("contact-thank-you");
+ // Toggle contact information form
+        contactInfoCheckbox.addEventListener("change", () => {
+            if (contactInfoCheckbox.checked) {
+                contactInfoForm.classList.remove("hidden");
+            } else {
+                contactInfoForm.classList.add("hidden");
+                contactSubmitBtn.disabled = true;
+                contactNameInput.value = "";
+                contactEmailInput.value = "";
+                contactThankYou.classList.add("hidden");
+            }
+        });
+        
+    // Enable submit button if name and email are filled
+        contactNameInput, contactEmailInput].forEach(input => {
+            input.addEventListener("input", () => {
+                const isFormValid = contactNameInput.value.trim() !== "" && contactEmailInput.value.trim() !== "";
+                contactSubmitBtn.disabled = !isFormValid;
+            });
+        });
+        
+    // Handle submit button click
+        contactSubmitBtn.addEventListener("click", () => {
+            contactSubmitBtn.disabled = true;
+            contactInfoForm.classList.add("hidden");
+            contactThankYou.classList.remove("hidden");
+        });
+    });    
 // Toggle detailed information
     toggleInfoBtn.addEventListener("click", () => {
         if (detailedInfo.style.display === "none") {
