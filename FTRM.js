@@ -90,34 +90,6 @@ document.addEventListener("DOMContentLoaded", () => {
     const contactEmailInput = document.getElementById("contact-email");
     const contactSubmitBtn = document.getElementById("contact-submit-btn");
     const contactThankYou = document.getElementById("contact-thank-you");
- // Toggle contact information form
-        contactInfoCheckbox.addEventListener("change", () => {
-            if (contactInfoCheckbox.checked) {
-                contactInfoForm.classList.remove("hidden");
-            } else {
-                contactInfoForm.classList.add("hidden");
-                contactSubmitBtn.disabled = true;
-                contactNameInput.value = "";
-                contactEmailInput.value = "";
-                contactThankYou.classList.add("hidden");
-            }
-        });
-        
-    // Enable submit button if name and email are filled
-        contactNameInput, contactEmailInput].forEach(input => {
-            input.addEventListener("input", () => {
-                const isFormValid = contactNameInput.value.trim() !== "" && contactEmailInput.value.trim() !== "";
-                contactSubmitBtn.disabled = !isFormValid;
-            });
-        });
-        
-    // Handle submit button click
-        contactSubmitBtn.addEventListener("click", () => {
-            contactSubmitBtn.disabled = true;
-            contactInfoForm.classList.add("hidden");
-            contactThankYou.classList.remove("hidden");
-        });
-    });    
 // Toggle detailed information
     toggleInfoBtn.addEventListener("click", () => {
         if (detailedInfo.style.display === "none") {
@@ -198,6 +170,34 @@ playTestSoundBtn.addEventListener("click", () => {
         console.log("Audio is paused.");
     }
 });
+// Toggle contact information form
+        contactInfoCheckbox.addEventListener("change", () => {
+            if (contactInfoCheckbox.checked) {
+                contactInfoForm.classList.remove("hidden");
+            } else {
+                contactInfoForm.classList.add("hidden");
+                contactSubmitBtn.disabled = true;
+                contactNameInput.value = "";
+                contactEmailInput.value = "";
+                contactThankYou.classList.add("hidden");
+            }
+        });
+        
+    // Enable submit button if name and email are filled
+        contactNameInput, contactEmailInput].forEach(input => {
+            input.addEventListener("input", () => {
+                const isFormValid = contactNameInput.value.trim() !== "" && contactEmailInput.value.trim() !== "";
+                contactSubmitBtn.disabled = !isFormValid;
+            });
+        });
+        
+    // Handle submit button click
+        contactSubmitBtn.addEventListener("click", () => {
+            contactSubmitBtn.disabled = true;
+            contactInfoForm.classList.add("hidden");
+            contactThankYou.classList.remove("hidden");
+        });
+    });    
 // 音频播放结束逻辑
 testAudio.onended = () => {
     console.log("Audio playback ended."); // 日志
