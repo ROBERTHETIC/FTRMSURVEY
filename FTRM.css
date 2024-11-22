@@ -29,7 +29,6 @@ body {
     padding: 20px;
     box-sizing: border-box;
 }
-
 .container.hidden {
     display: none;
 }
@@ -325,12 +324,10 @@ input[type="range"]::-moz-range-thumb {
     font-weight: bold;  /* 加粗字体 */
     font-size: 1.1em;   /* 放大字体 */
 }
-
 #contact-email {
     font-size: 1em;  /* 增大输入框内文字的大小 */
     border: 2px solid #888; /* 稍微加粗边框，增加可见性 */
 }
-
 #submit-contact-btn {
     font-weight: bold;  /* 加粗提交按钮字体 */
     font-size: 1em;     /* 增大提交按钮文字的大小 */
