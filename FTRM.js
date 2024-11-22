@@ -102,11 +102,13 @@ document.addEventListener("DOMContentLoaded", () => {
         console.log("Navigated to Step 0."); // Debugging log
     });
 
-    // Disagree button logic: Exit the study
+// Disagree button logic: Exit the study
     disagreeBtn.addEventListener("click", () => {
         alert("You chose not to participate. Exiting the study.");
-        // Optional: Redirect to an exit page or provide more feedback
-    });
+        consentForm.classList.add("hidden"); // Hide Consent Form
+        exitPage.classList.remove("hidden"); // Show Exit Page (Step 5)
+        console.log("Navigated to Exit Page.");
+});
 
     // Enable Generate ID button only when initials input is valid
     initialsInput.addEventListener("input", () => {
