@@ -89,14 +89,16 @@ document.addEventListener("DOMContentLoaded", () => {
     const toStepInstructionsBtn = document.getElementById("to-step-instructions");
     const step0 = document.getElementById("step-0");
     const stepInstructions = document.getElementById("step-instructions");
-// Toggle contact info input visibility
+
+ // Toggle contact info input visibility when checkbox is checked
     contactCheckbox.addEventListener("change", () => {
         if (contactCheckbox.checked) {
-            contactInfo.classList.remove("hidden");
+            contactInfo.style.display = "block"; // 展示输入框和按钮
         } else {
-            contactInfo.classList.add("hidden");
-            contactEmail.value = ""; // Clear email input
-            submitContactBtn.disabled = true; // Disable submit button
+            contactInfo.style.display = "none"; // 隐藏输入框和按钮
+            contactEmail.value = ""; // 清空输入框内容
+            submitContactBtn.disabled = true; // 禁用提交按钮
+            thankYouMessage.style.display = "none"; // 隐藏感谢信息
         }
     });
 
@@ -118,7 +120,7 @@ document.addEventListener("DOMContentLoaded", () => {
         submitContactBtn.disabled = true;
         submitContactBtn.style.opacity = "0.5";
         contactCheckbox.disabled = true;
-        thankYouMessage.classList.remove("hidden");
+        thankYouMessage.style.display = "block"; // 显示感谢信息
     });
 // Toggle detailed information
     toggleInfoBtn.addEventListener("click", () => {
