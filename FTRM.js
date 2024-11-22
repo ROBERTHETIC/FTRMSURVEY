@@ -299,6 +299,7 @@ recordBtn.addEventListener("click", async () => {
     }
 });
 
+
 // Step 3: Add dynamic playback instruction
 const playbackInstructionElement = document.createElement("p");
 playbackInstructionElement.className = "playback-instruction";
@@ -371,7 +372,6 @@ sliders.forEach((slider) => {
         valueDisplay.textContent = slider.value; // Update the centered value dynamically
         validateSliders(); // Validate sliders after updating the value
     });
-});
 
 // Validate sliders
 function validateSliders() {
