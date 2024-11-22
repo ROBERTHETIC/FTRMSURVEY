@@ -264,7 +264,6 @@
         <button type="submit" class="submit-btn" disabled>Submit</button>
     </form>
 </div>
-
 <!-- Step 5: Thank You Page -->
 <div id="step-5" class="container hidden">
     <h1>Thank You!</h1>
@@ -284,17 +283,18 @@
     <p>Your participation is greatly appreciated, and we hope you have a wonderful day!</p>
 
     <!-- Optional Contact Information Section -->
-    <div class="optional-contact">
-        <label>
+    <div class="optional-contact" style="text-align: center; margin-top: 30px;">
+        <label for="contact-checkbox" style="display: inline-block; margin-bottom: 10px;">
             <input type="checkbox" id="contact-checkbox">
             Please leave your contact information for us to contact you later (optional)
         </label>
-        <div id="contact-info" class="hidden">
-            <input type="email" id="contact-email" placeholder="Enter your email address">
-            <button id="submit-contact-btn" class="next-btn" disabled>Submit</button>
+        <!-- Hidden contact information section, visible only when checkbox is checked -->
+        <div id="contact-info" class="hidden" style="margin-top: 20px; text-align: center; display: none;">
+            <input type="email" id="contact-email" placeholder="Enter your email address" style="padding: 10px; border-radius: 5px; border: 1px solid #ccc; width: 80%; max-width: 400px;">
+            <button id="submit-contact-btn" class="next-btn" disabled style="margin-top: 15px;">Submit</button>
+            <p id="thank-you-message" class="hidden" style="margin-top: 15px; display: none;">Thank you for providing your contact information! We look forward to getting in touch with you for future interviews.</p>
         </div>
     </div>
-    <p id="thank-you-message" class="hidden">Thank you for providing your contact information! We look forward to getting in touch with you for future interviews.</p>
 </div>
     <script src="./FTRM.js" defer></script>
 </html>
