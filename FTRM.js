@@ -364,25 +364,34 @@ submitBtn.disabled = true;
 submitBtn.style.opacity = "0.5";
 
 // Real-time slider value update and validation
+let slidersMoved = new Set(); // To track which sliders have been interacted with
+
 sliders.forEach((slider) => {
     slider.addEventListener("input", () => {
         const valueDisplay = document.getElementById(`${slider.id}-value`);
         valueDisplay.textContent = slider.value; // Update the centered value dynamically
+
+        // Add this slider to the set of moved sliders
+        slidersMoved.add(slider.id);
+
         validateSliders(); // Validate sliders each time a value changes
     });
 });
 
 // Function to validate sliders and enable the submit button
 function validateSliders() {
-    // Check if all sliders are moved from their default values (e.g., "4")
-    const allMoved = Array.from(sliders).every((slider) => slider.value !== "4");
+    // Check if at least one slider has been moved
+    const allMoved = slidersMoved.size === sliders.length;
 
     // Enable or disable the submit button based on the sliders' state
     submitBtn.disabled = !allMoved;
     submitBtn.style.opacity = allMoved ? "1" : "0.5";
 }
+
 // Reset sliders for the next interaction
 function resetSlidersForNextInteraction() {
+    slidersMoved.clear(); // Clear the set of moved sliders
+
     sliders.forEach((slider) => {
         slider.value = "4"; // Reset to default value "4"
         const valueDisplay = document.getElementById(`${slider.id}-value`);
