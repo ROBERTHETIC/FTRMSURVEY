@@ -84,6 +84,35 @@ document.addEventListener("DOMContentLoaded", () => {
     const toStepInstructionsBtn = document.getElementById("to-step-instructions");
     const step0 = document.getElementById("step-0");
     const stepInstructions = document.getElementById("step-instructions");
+    const contactCheckbox = document.getElementById("contact-checkbox");
+    const contactForm = document.getElementById("contact-form");
+    const contactInfoInput = document.getElementById("contact-info");
+    const contactSubmitBtn = document.getElementById("contact-submit-btn");
+    const contactThankYouMsg = document.getElementById("contact-thank-you");
+
+    // Toggle contact form visibility
+    contactCheckbox.addEventListener("change", () => {
+        if (contactCheckbox.checked) {
+            contactForm.classList.remove("hidden");
+        } else {
+            contactForm.classList.add("hidden");
+            contactThankYouMsg.classList.add("hidden");
+            contactInfoInput.value = ""; // Clear input if unchecked
+        }
+    });
+
+    // Submit button functionality for contact form
+    contactSubmitBtn.addEventListener("click", () => {
+        if (contactInfoInput.value.trim() !== "") {
+            contactInfoInput.disabled = true; // Disable input after submission
+            contactSubmitBtn.disabled = true; // Disable submit button after submission
+            contactSubmitBtn.style.opacity = "0.5"; // Make button visually inactive
+            contactThankYouMsg.classList.remove("hidden"); // Show thank you message
+        } else {
+            alert("Please provide your contact information before submitting.");
+        }
+    });
+});
 // Toggle detailed information
     toggleInfoBtn.addEventListener("click", () => {
         if (detailedInfo.style.display === "none") {
@@ -422,3 +451,4 @@ function showThankYouPage() {
 
     console.log("Thank you page displayed."); // Debugging log
 }
+
