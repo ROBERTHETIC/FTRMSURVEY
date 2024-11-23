@@ -1,10 +1,10 @@
 let interactionCount = 1; // Current interaction count
 const maxInteractions = 4; // Maximum number of interactions
 const audioSources = [
-    "assets/audio/female_us.MP3",
-    "assets/audio/female_uk.MP3",
-    "assets/audio/male_uk.MP3",
-    "assets/audio/male_us.MP3",
+    "assets/audio/female us +4s.MP3",
+    "assets/audio/female uk +4s.MP3",
+    "assets/audio/male uk +4s.MP3",
+    "assets/audio/male us+4.MP3",
 ];
 
 // Playback instructions for each interaction
