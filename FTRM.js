@@ -6,27 +6,6 @@ const audioSources = [
     "assets/audio/male uk +4s.MP3",
     "assets/audio/male us+4.MP3",
 ];
-import { initializeApp } from "firebase/app";
-import { getAnalytics } from "firebase/analytics";
-// TODO: Add SDKs for Firebase products that you want to use
-// https://firebase.google.com/docs/web/setup#available-libraries
-
-// Your web app's Firebase configuration
-// For Firebase JS SDK v7.20.0 and later, measurementId is optional
-const firebaseConfig = {
-  apiKey: "AIzaSyBW0GM3gJCTXeB5RCOzJK8sfzi4GoxIBS0",
-  authDomain: "ftrmsurvey.firebaseapp.com",
-  projectId: "ftrmsurvey",
-  storageBucket: "ftrmsurvey.firebasestorage.app",
-  messagingSenderId: "535934043241",
-  appId: "1:535934043241:web:adb39bb0bd0fe1a205cef8",
-  measurementId: "G-T7R7SYHCZP"
-};
-
-// Initialize Firebase
-const app = initializeApp(firebaseConfig);
-const analytics = getAnalytics(app);
-
 // Playback instructions for each interaction
 const playbackInstructions = [
     "The voice assistant VA-A1 is responding to your question. Please listen to the response below carefully, the audio will only be played once.",
