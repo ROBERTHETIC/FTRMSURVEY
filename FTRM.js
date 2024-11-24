@@ -6,6 +6,7 @@ const audioSources = [
     "assets/audio/male uk +4s.MP3",
     "assets/audio/male us+4.MP3",
 ];
+
 // Playback instructions for each interaction
 const playbackInstructions = [
     "The voice assistant VA-A1 is responding to your question. Please listen to the response below carefully, the audio will only be played once.",
